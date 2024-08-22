@@ -22,6 +22,15 @@ async function initApp() {
     const state = await storageSystem.getState();
     const user = await storageSystem.getUser();
 
+    const lastUpdatedDate = new Date(state.last_updated);
+    const now = new Date();
+
+    // Calculate the time difference in seconds
+    const elapsedSeconds = Math.floor((now.getTime() - lastUpdatedDate.getTime()) / 1000);
+    console.log(`Added time you was offline to claim timer: `, elapsedSeconds);
+    // Update the timer with the elapsed time
+    state.timer += elapsedSeconds;
+
     systemManager.addSystem(telegramSystem);
     systemManager.addSystem(storageSystem)
 
