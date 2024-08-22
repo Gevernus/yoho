@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <title>Skipper</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            background: linear-gradient(to bottom, #5CD8FF, #9FBAFF);
+            width: 100%;
+            height: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            gap: 5px;
+        }
+
+        .button-container img {
+            position: absolute;
+        }
+
+        /* Button Styles */
+        .button {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        .button img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="header loading-header">Welcome to Skipper</div>
+        <div class="loading-circle"></div>
+    </div>
+    <div id="main">
+        <div id="content" class="container">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+        <div class="button-container">
+            <img src="/images/buttons-back.svg" alt="Button Background">
+            <div class="button navigate" data-page="todo">
+                <img src="/images/todo.svg" alt="Todo">
+            </div>
+            <div class="button navigate" data-page="shop">
+                <img src="/images/shop.svg" alt="Shop">
+            </div>
+            <div class="button navigate" data-page="friends">
+                <img src="/images/friends.svg" alt="Friends">
+            </div>
+            <div class="button navigate" data-page="wallet">
+                <img src="/images/wallet.svg" alt="Wallet">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script type="module" src="/systemManager.js"></script>
+    <script type="module" src="/ecs.js"></script>
+    <script type="module" src="/systems.js"></script>
+    <script type="module" src="/components.js"></script>
+    <script type="module" src="/index.js"></script>
+</body>
+
+</html>

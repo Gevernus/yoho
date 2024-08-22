@@ -1,0 +1,19 @@
+html {
+    height: 100dvh;
+    overflow: hidden
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: auto;
+}
+
+@font-face {
+    font-family: 'PixelSplitter';
+    src: url('/fonts/PixelSplitter-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

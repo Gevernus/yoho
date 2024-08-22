@@ -1,0 +1,32 @@
+<div id="page-content">
+  <header class="p-6 text-center">
+    <h1 class="game-title">
+      Shop
+    </h1>
+  </header>
+  <div class="info-area mb-8 w-full max-w-md info-area-shadow">
+    <div class="info-row flex justify-between items-center">
+      <span class="flex items-center">
+        <span class="icon icon-coin"></span>
+        <span id="coins" class="font-bold">0</span>
+      </span>
+      <span class="flex items-center passive-element">
+        <span class="icon icon-passive-income"></span>
+        <span id="passiveIncome" class="font-bold">1</span>
+      </span>
+    </div>
+  </div>
+  <div id="shop-tabs">
+    <button class="tab-button active" data-tab="items">Items</button>
+    <!-- <button class="tab-button" data-tab="slots">Slots</button> -->
+  </div>
+
+  <div id="shop-content">
+    <div id="monsters-container" class="tab-content active scrollable-container grid-container">
+      <!-- Monster items will be dynamically inserted here -->
+    </div>
+    <div id="cards-container" class="tab-content scrollable-container grid-container">
+      <!-- Card items will be dynamically inserted here -->
+    </div>
+  </div>
+</div>

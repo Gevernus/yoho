@@ -1,0 +1,197 @@
+<head>
+  <style>
+    #page-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #upper-block {
+      width: 62%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #coin-container {
+      width: 100%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    #coin-background {
+      position: absolute;
+      width: 100%;
+      height: auto;
+    }
+
+    #coin {
+      position: relative;
+      z-index: 2;
+      margin-left: 10px;
+      width: 52px;
+      height: 52px;
+    }
+
+    #coin-value {
+      position: relative;
+      z-index: 2;
+      font-family: 'PixelSplitter', sans-serif;
+      font-size: 34px;
+      color: #FFFFFF;
+      margin-left: 10px;
+      text-align: center;
+      width: 100%;
+      margin-right: 10%;
+      overflow: hidden;
+    }
+
+    #time {
+      font-family: 'PixelSplitter', sans-serif;
+      font-size: 12px;
+      color: #004D94;
+      text-align: center;
+      align-self: center;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 12px;
+    }
+
+    #coming-soon {
+      position: relative;
+      left: -20%;
+    }
+
+    #bottom-block {
+      margin-top: 7px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #buy-skipper {
+      height: 65px;
+    }
+
+    #claim-button {
+      height: 65px;
+    }
+
+    #mini-coin {
+      width: 30px;
+      height: 30px;
+    }
+
+    #income {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      color: #004D94;
+      font-size: 12px;
+    }
+
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    #time-container {
+      position: relative;
+      left: calc(50%);
+      width: 50px;
+      top: 20%;
+    }
+
+    .timer-background {
+      background-image: url('/images/claim-back.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      width: 220px;
+      height: 50px;
+    }
+
+    .timer-number {
+      font-family: 'PixelSplitter', sans-serif;
+      font-size: 12px;
+      color: #004D94;
+      z-index: 1;
+    }
+
+    .timer-unit {
+      font-family: 'Arial', sans-serif;
+      font-size: 12px;
+      color: #004D94;
+      margin-top: 3px;
+      z-index: 1;
+    }
+
+    .timer-fill {
+      position: relative;
+      left: 5%;
+      height: 67%;
+      background-color: white;
+      width: 60%;
+      border-radius: 20px;
+      box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1), inset 0px -1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    #league {
+      height: 60px;
+    }
+
+    #buy-skipper {
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<header class="header">
+  <img id="back-button" src="/images/back-button.svg" alt="back-button">
+  <img id="coming-soon" src="/images/coming-soon.svg" alt="coming-soon">
+  <span id="time">20:00</span>
+</header>
+<div id="page-content">
+  <div id="upper-block">
+    <img id="yoho" src="/images/yoho.svg" alt="yoho">
+    <div id="coin-container">
+      <img id="coin-background" src="/images/coin-back.svg" alt="coin-back">
+      <img id="coin" src="/images/coin.svg" alt="coin">
+      <span id="coin-value">100000</span>
+    </div>
+    <img id="league" src="/images/legendary-league.svg" alt="legendary-league">
+  </div>
+  <div id="middle-block">
+    <img src="/images/skipper.svg" alt="skipper">
+  </div>
+  <div id="bottom-block">
+    <div id="income">
+      <img id="mini-coin" src="/images/mini-coin.svg" alt="mini-coin">
+      <span id="income-text">100/h</span>
+    </div>
+    <div class="timer-container">
+      <div class="timer-background">
+        <div class="timer-fill">
+          <div id="time-container">
+            <span class="timer-number">46</span>
+            <span class="timer-unit">min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img id="claim-button" src="/images/claim-button.svg" alt="claim-button">
+    <img id="buy-skipper" src="/images/buy-skipper.svg" alt="buy-skipper">
+  </div>
+</div>
