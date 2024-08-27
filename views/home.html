@@ -177,7 +177,45 @@
       width: 60%;
       flex-direction: column;
     }
-    
+
+    #claim-container {
+      display: flex;
+      flex-direction: column;
+      width: 150px;
+      height: 140px;
+    }
+
+    #claim-values {
+      display: flex;
+      background-image: url('/images/claim-value-back.svg');
+      width: 100%;
+      height: 100%;
+    }
+
+    .claim-value {
+      display: flex;
+      flex-direction: column;
+      background-image: url('/images/claim-value.svg');
+      height: 100%;
+      width: 100%;
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-right: 1px;
+      margin-top: 8px;
+    }
+
+    #mini-coin-claim {
+      align-self: center;
+      margin-top: 20px;
+      width: 16px;
+    }
+
+    #claim-value-coins {
+      color: #004D94;
+      align-self: center;
+      font-size: 15px;
+    }
   </style>
 </head>
 <!-- <header class="header">
@@ -213,7 +251,15 @@
         </div>
       </div>
     </div>
-    <img id="claim-button" src="/images/claim-button.svg" alt="claim-button">
+    <div id="claim-container">
+      <div id="claim-values">
+        <div class="claim-value">
+          <img id="mini-coin-claim" src="/images/mini-coin.svg" alt="mini-coin">
+          <span id="claim-value-coins">1000</span>
+        </div>
+      </div>
+      <img id="claim-button" src="/images/claim-button.svg" alt="claim-button">
+    </div>
     <img id="buy-skipper" src="/images/buy-skipper.svg" alt="buy-skipper">
   </div>
 </div>
