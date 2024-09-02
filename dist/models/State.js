@@ -21,37 +21,13 @@ __decorate([
     __metadata("design:type", String)
 ], State.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: 500 }),
+    (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
-], State.prototype, "energy", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 500 }),
-    __metadata("design:type", Number)
-], State.prototype, "max_energy", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 1 }),
-    __metadata("design:type", Number)
-], State.prototype, "energy_restore", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 1 }),
-    __metadata("design:type", Number)
-], State.prototype, "level", void 0);
+], State.prototype, "timer", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
 ], State.prototype, "coins", void 0);
-__decorate([
-    (0, typeorm_1.Column)("float", { default: 0 }),
-    __metadata("design:type", Number)
-], State.prototype, "passive_income", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 0 }),
-    __metadata("design:type", Number)
-], State.prototype, "progress", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: 1 }),
-    __metadata("design:type", Number)
-], State.prototype, "tap_power", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }),
     __metadata("design:type", Date)

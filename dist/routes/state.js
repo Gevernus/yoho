@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const User_1 = require("../models/User");
 const State_1 = require("../models/State");
+const Referral_1 = require("../models/Referral");
 const router = (0, express_1.Router)();
 router.post('/user', async (req, res) => {
     const { userData, inviterId } = req.body;
@@ -19,6 +20,15 @@ router.post('/user', async (req, res) => {
             user = result.raw[0];
             state = State_1.State.create();
             state.id = user.id;
+            if (inviterId && inviterId != user.id) {
+                const referral = Referral_1.Referral.create();
+                referral.inviterId = inviterId;
+                referral.userId = user.id;
+                referral.username = user.username;
+                referral.bonus = 10;
+                referral.status = 'accepted';
+                await referral.save();
+            }
             await state.save();
         }
         else {
@@ -33,40 +43,13 @@ router.post('/user', async (req, res) => {
         return res.status(500).json({ message: "Error saving user data" });
     }
 });
-router.get('/:userId/calculate_passive', async (req, res) => {
-    const userId = req.params.userId;
-    try {
-        const state = await State_1.State.findOne({ where: { id: userId } });
-        let passive_income = 0;
-        let shouldShowPopup = false;
-        let energyRestored = 0;
-        if (state) {
-            const now = new Date();
-            const lastUpdated = new Date(state.last_updated);
-            const timeDiffInSeconds = Math.floor((now.getTime() - lastUpdated.getTime()) / 1000);
-            const maxAccumulationTime = Math.min(timeDiffInSeconds, 3 * 60 * 60);
-            passive_income = Math.floor(state.passive_income / 3600 * maxAccumulationTime);
-            energyRestored = state.energy_restore * timeDiffInSeconds;
-            shouldShowPopup = timeDiffInSeconds > 300 && passive_income > 0;
-            console.log(`Time since last update in sec: ${timeDiffInSeconds}, should show popup: ${shouldShowPopup}`);
-        }
-        return res.status(200).json({ passive_income, shouldShowPopup, energyRestored });
-    }
-    catch (error) {
-        console.error(`Error calculating of passive income for: ${userId}`, error);
-        return res.status(500).json({ message: "Error calculating passive income" });
-    }
-});
 router.post('/state', async (req, res) => {
     const stateData = req.body;
     try {
         const state = await State_1.State.findOne({ where: { id: stateData.id } });
         if (state) {
             state.coins = stateData.coins;
-            state.energy = stateData.energy;
-            state.tap_power = stateData.tap_power;
-            state.passive_income = stateData.passive_income;
-            state.level = stateData.level;
+            state.timer = stateData.timer;
             state.save();
         }
         return res.status(200).json({ message: "State data saved successfully" });

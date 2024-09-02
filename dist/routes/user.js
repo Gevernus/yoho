@@ -51,7 +51,6 @@ router.post('/user/:id/energy', async (req, res) => {
         if (!state) {
             return res.status(404).json({ error: 'User not found' });
         }
-        state.energy = energy;
         await state.save();
         res.json({ message: 'User energy updated successfully' });
     }
@@ -70,8 +69,6 @@ router.post('/user/:id/update', async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
         state.coins = userData.coins;
-        state.tap_power = userData.tap_power;
-        state.energy = userData.energy;
         await state.save();
         res.json({ message: 'User data updated successfully' });
     }

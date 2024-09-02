@@ -5,8 +5,17 @@ export class CoinsComponent {
 }
 
 export class PassiveIncomeComponent {
-    constructor() {
+    constructor(items) {
+        this.calculate(items);
+    }
+
+    calculate(items) {
         this.incomePerHour = 100;
+        for (const item of items) {
+            const level = item.userItems && item.userItems.length > 0 ? item.userItems[0].level : 1;
+            const bonus = level == 1 ? 0 : Math.round(item.passive_bonus * Math.pow(1.50, level - 1));
+            this.incomePerHour += bonus;
+        }
     }
 }
 
@@ -25,6 +34,19 @@ export class ShopComponent {
 export class UserComponent {
     constructor(user) {
         this.user = user;
+    }
+}
+
+export class ItemsComponent {
+    constructor(items) {
+        this.items = items;
+    }
+}
+
+export class ReferralsComponent {
+    constructor(items) {
+        this.items = items;
+
     }
 }
 

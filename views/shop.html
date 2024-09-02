@@ -1,32 +1,270 @@
-<div id="page-content">
-  <header class="p-6 text-center">
-    <h1 class="game-title">
-      Shop
-    </h1>
-  </header>
-  <div class="info-area mb-8 w-full max-w-md info-area-shadow">
-    <div class="info-row flex justify-between items-center">
-      <span class="flex items-center">
-        <span class="icon icon-coin"></span>
-        <span id="coins" class="font-bold">0</span>
-      </span>
-      <span class="flex items-center passive-element">
-        <span class="icon icon-passive-income"></span>
-        <span id="passiveIncome" class="font-bold">1</span>
-      </span>
-    </div>
-  </div>
-  <div id="shop-tabs">
-    <button class="tab-button active" data-tab="items">Items</button>
-    <!-- <button class="tab-button" data-tab="slots">Slots</button> -->
-  </div>
+<head>
+  <style>
+    #head-info {
+      padding-left: 25px;
+      padding-right: 25px;
+      display: flex;
+      justify-content: space-between;
+      height: 95px;
+      background-image: url('/images/shop-head.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-  <div id="shop-content">
-    <div id="monsters-container" class="tab-content active scrollable-container grid-container">
-      <!-- Monster items will be dynamically inserted here -->
+    #combo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 165px;
+      background-image: url('/images/combo-container.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    #combo-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #combo-elements {
+      height: 95px;
+      display: flex;
+      margin-right: 10px;
+    }
+
+    #combo-text {
+      margin-left: 40%;
+      color: #004D94;
+      margin-bottom: 5px;
+    }
+
+    #coin-shop {
+      width: 15px;
+      height: 15px;
+      margin-bottom: 4px;
+    }
+
+    #claim-element {
+      width: 100%;
+      height: 59px;
+      align-items: center;
+      display: flex;
+      gap: 5px;
+      background-image: url('/images/bonus-rectangle.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    #shop-container {
+      width: 95%;
+      height: 270px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #98e0ff, #a6cfff);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      margin-left: 2.5%;
+      margin-right: 2.5%;
+    }
+
+    #shop-background {
+      background-image: url('/images/shop-container.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 260px;
+    }
+
+    #combo-label {
+      font-family: 'PixelSplitter', sans-serif;
+      font-size: 19px;
+      color: #FFFFFF;
+      text-align: center;
+      width: 100%;
+    }
+
+    #page-content {
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+    }
+
+    #shop-label {
+      height: 47px;
+    }
+
+    #player-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      display: inline-block;
+      align-self: center;
+    }
+
+    #player-username {
+      align-self: center;
+    }
+
+    #left-side {
+      display: flex;
+      gap: 15px
+    }
+
+    #income-text {
+      color: #004D94;
+      font-size: 16px;
+    }
+
+    #coins-text {
+      color: #004D94;
+      font-size: 16px;
+    }
+
+    .combo-element {
+      margin-top: 10px;
+      width: 85px;
+    }
+
+    .combo-item {
+      position: relative;
+      top: -90px;
+      left: 15px;
+    }
+
+    .combo-lock {
+      position: relative;
+      top: -147px;
+      left: 35px;
+      background-color: #a49f9fa6;
+      border-radius: 50px;
+    }
+
+    #tabs {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
+    .tab {
+      font-size: 13px;
+      width: 80px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border-radius: 15px;
+      background: #c3e4ff;
+      box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
+      color: #7da8cf;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    }
+
+    .tab.active {
+      background: linear-gradient(145deg, #ffffff, #d0eaff);
+      box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
+      color: #0d5f9b;
+    }
+
+    .item-image {
+      position: relative;
+      top: -125px;
+      scale: 0.8;
+    }
+
+    .item-footer {
+      position: relative;
+      font-size: 11px;
+      top: -134px;
+      left: 16px;
+      color: #004D94;
+    }
+
+    .item-coin {
+      width: 10px;
+    }
+
+    .plus-income {
+      margin-left: 17px;
+    }
+
+    .shop-element {
+      display: flex;
+      flex-direction: column;
+      width: 123px;
+      height: 130px;
+    }
+
+    #shop-elements {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 5px;
+      height: 229px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .item-back {
+      scale: 1.1;
+    }
+  </style>
+</head>
+<img id="back-button" src="/images/back-button.svg" alt="back-button">
+<div id="page-content">
+  <img id="shop-label" src="/images/shop-label.svg" alt="shop-label">
+  <div id="head-info">
+    <div id="left-side">
+      <span id="player-avatar"></span>
+      <span id="player-username"></span>
     </div>
-    <div id="cards-container" class="tab-content scrollable-container grid-container">
-      <!-- Card items will be dynamically inserted here -->
+    <div id="income">
+      <span id="coins-text">1000</span>
+      <img id="coin-header" src="/images/mini-coin.svg" alt="mini-coin">
+      <span id="income-text">100/h</span>
     </div>
   </div>
-</div>
+  <div id="combo-block">
+    <span id="combo-label">Combo</span>
+    <div id="combo-container">
+      <div id="combo-elements">
+        <div class="combo-element">
+          <img src="images/combo-back.svg" alt="combo">
+          <img class="combo-item" src="images/shop-item-image.svg" alt="combo">
+          <img class="combo-lock" src="images/lock.svg" alt="lock">
+        </div>
+        <div class="combo-element">
+          <img src="images/combo-back.svg" alt="combo">
+          <img class="combo-item" src="images/shop-item-image.svg" alt="combo">
+          <img class="combo-lock" src="images/lock.svg" alt="lock">
+        </div>
+        <div class="combo-element">
+          <img src="images/combo-back.svg" alt="combo">
+          <img class="combo-item" src="images/shop-item-image.svg" alt="combo">
+          <img class="combo-lock" src="images/lock.svg" alt="lock">
+        </div>
+        <div class="combo-element">
+          <img src="images/combo-back.svg" alt="combo">
+          <img class="combo-item" src="images/shop-item-image.svg" alt="combo">
+          <img class="combo-lock" src="images/lock.svg" alt="lock">
+        </div>
+      </div>
+      <div id="claim-element">
+        <span id="combo-text">+10000</span>
+        <img id="coin-shop" src="/images/mini-coin.svg" alt="mini-coin">
+      </div>
+    </div>
+  </div>
+  <div id="shop-container">
+    <div id="tabs">
+      <div class="tab active"><span id="tab-text">Ship</span></div>
+      <div class="tab"><span id="tab-text">Crew</span></div>
+      <div class="tab"><span id="tab-text">Logistic</span></div>
+      <div class="tab"><span id="tab-text">Skins</span></div>
+    </div>
+    <div id="shop-elements">
+    
+    </div>
+  </div>

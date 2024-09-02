@@ -9,37 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Referral = void 0;
 const typeorm_1 = require("typeorm");
-const Referral_1 = require("./Referral");
-let User = class User extends typeorm_1.BaseEntity {
+const User_1 = require("./User");
+let Referral = class Referral extends typeorm_1.BaseEntity {
 };
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
-    __metadata("design:type", String)
-], User.prototype, "id", void 0);
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    __metadata("design:type", Number)
+], Referral.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "first_name", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "last_name", void 0);
+], Referral.prototype, "inviterId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], Referral.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "language_code", void 0);
+], Referral.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Referral_1.Referral, referral => referral.inviter),
-    __metadata("design:type", Array)
-], User.prototype, "referrals", void 0);
-User = __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Referral.prototype, "bonus", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => User_1.User, user => user.referrals),
+    __metadata("design:type", User_1.User)
+], Referral.prototype, "inviter", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 'pending' }),
+    __metadata("design:type", String)
+], Referral.prototype, "status", void 0);
+Referral = __decorate([
     (0, typeorm_1.Entity)()
-], User);
-exports.User = User;
-//# sourceMappingURL=User.js.map
+], Referral);
+exports.Referral = Referral;
+//# sourceMappingURL=Referral.js.map

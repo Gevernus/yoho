@@ -123,6 +123,43 @@ export class StorageSystem extends System {
         return this.user;
     }
 
+    async getItems() {
+        console.log('Trying to get items')
+        try {
+            const response = await fetch(`api/${this.tgUser.id}/items`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed getting items');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Failed getting items:', error);
+        }
+    }
+
+    async getReferrals() {
+        try {
+            const response = await fetch(`api/${this.tgUser.id}/referrals`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed getting referrals');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Failed getting referrals:', error);
+        }
+    }
+
     async saveState() {
         if (!this.entity) {
             console.error('No entity provided to save state');

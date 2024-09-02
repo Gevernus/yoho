@@ -1,0 +1,273 @@
+<head>
+    <style>
+        *,
+        *:before,
+        *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        #invite-content {
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            height: 635px;
+        }
+
+        #invite-upper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #invite-tasks {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            padding: 20px 0;
+            border-radius: 20px;
+            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            background: #cbf9ff5d;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            padding-left: 10%;
+            gap: 11px;
+        }
+
+        .task-value {
+            display: flex;
+        }
+
+        .task-coin-value {
+            font-family: "PF Agora Slab Pro", sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #004d94;
+        }
+
+        .task-coin-znak {
+            display: block;
+            font-family: "PF Agora Slab Pro", sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+            color: #004d94;
+        }
+
+        .task-coin {
+            width: 10px;
+            height: 10px;
+        }
+
+        .task-desc {
+            width: 50%;
+            font-family: "PF Agora Slab Pro", sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #004d94;
+        }
+
+        #friends-list {
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+            color: #004d94;
+        }
+
+        #friends-users {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 90%;
+            max-height: 250px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .friends-user {
+            width: 100%;
+            border-radius: 19px;
+            padding: 5px 6px 7px 10px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3); */
+            background: #fff;
+        }
+
+        .friends-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .friends-name {
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            color: #004d94;
+        }
+
+        .friends-coin {
+            font-family: "PF Agora Slab Pro", sans-serif;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 1.2;
+            color: #004d94;
+            opacity: 0.6;
+        }
+
+        .friends-photo {
+            width: 27px;
+            height: 27px;
+            border-radius: 100%;
+            box-shadow: 0 3px 4px 0 rgba(0, 39, 75, 0.29);
+        }
+
+        #invite-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: #004d94;
+        }
+
+        #copy-link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+            width: 144px;
+            height: 35px;
+            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            background: #fff;
+
+        }
+
+        #invite-link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+
+            width: 90px;
+            height: 35px;
+            box-shadow: 5px 5px 13px 0 rgba(0, 173, 111, 0.9), -5px -5px 10px 0 rgba(0, 255, 215, 0.9), 5px -5px 10px 0 rgba(0, 173, 111, 0.2), -5px 5px 10px 0 rgba(0, 173, 111, 0.2), inset -1px -1px 2px 0 rgba(0, 173, 111, 0.5), inset 1px 1px 2px 0 rgba(0, 255, 215, 0.3);
+            background: #00ffa3;
+
+        }
+    </style>
+</head>
+<img id="back-button" src="/images/back-button.svg" alt="back-button">
+<div id="invite-content">
+    <div id="invite-upper">
+        <img id="invite-img" src="/images/invite-friends.svg" alt="Invite friends">
+        <img id="invite-description" src="/images/invite-friends-desc.svg" alt="And travel in a place with them">
+    </div>
+    <div id="invite-tasks">
+        <div class="task">
+            <div class="task-value">
+                <span class="task-coin-znak">+</span>
+                <span class="task-coin-value">5000</span>
+            </div>
+            <img class="task-coin" src="images/mini-coin.svg" alt="">
+            <span class="task-desc">For you and your friends</span>
+        </div>
+        <div class="task">
+            <div class="task-value">
+                <span class="task-coin-znak">+</span>
+                <span class="task-coin-value">25 000</span>
+            </div>
+            <img class="task-coin" src="images/mini-coin.svg" alt="">
+            <span class="task-desc">For you and your friends with TG Premium</span>
+        </div>
+    </div>
+    <div id="friends-list">friends list</div>
+    <div id="friends-users">
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+        <div class="friends-user">
+            <div class="friends-info">
+                <div class="friends-name">User 1</div>
+                <div class="friends-coin">
+                    <img class="task-coin" src="images/mini-coin.svg" alt="">
+                    <span>0/100,000</span>
+                </div>
+            </div>
+            <img class="friends-photo" src="images/avatar.svg" alt="avatar">
+        </div>
+    </div>
+    <div id="invite-links">
+        <div id="invite-link-button">invite</div>
+        <!-- <div id="copy-link-button">copy link</div> -->
+    </div>
+</div>

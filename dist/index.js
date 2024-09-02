@@ -1,7 +1,7 @@
 import { StorageSystem, TelegramSystem, UISystem, TimerSystem, ActionsSystem } from './systems.js';
 import { SystemManager } from './systemManager.js';
 import { Entity } from './ecs.js';
-import { CoinsComponent, TimerComponent, PassiveIncomeComponent, InputComponent, UserComponent } from './components.js';
+import { CoinsComponent, TimerComponent, PassiveIncomeComponent, InputComponent, UserComponent, ItemsComponent, ReferralsComponent } from './components.js';
 
 let lastTime = 0;
 const targetFPS = 60;
@@ -21,6 +21,8 @@ async function initApp() {
     const storageSystem = new StorageSystem(gameEntity, telegramSystem.getUser(), telegramSystem.getInviter());
     const state = await storageSystem.getState();
     const user = await storageSystem.getUser();
+    const items = await storageSystem.getItems();
+    const referrals = await storageSystem.getReferrals();
 
     const lastUpdatedDate = new Date(state.last_updated);
     const now = new Date();
@@ -33,11 +35,22 @@ async function initApp() {
 
     systemManager.addSystem(telegramSystem);
     systemManager.addSystem(storageSystem)
-
-    gameEntity.addComponent(new CoinsComponent(state.coins));
-    gameEntity.addComponent(new PassiveIncomeComponent());
+    const coinsComponent = new CoinsComponent(state.coins)
+    if (referrals && referrals.length > 0) {
+        referrals.forEach(referral => {
+            if (referral.status != 'claimed') {
+                coinsComponent.amount += referral.bonus;
+                referral.status = 'claimed';
+                claim(user.id, referral.id);
+            }
+        });
+    }
+    gameEntity.addComponent(coinsComponent);
+    gameEntity.addComponent(new PassiveIncomeComponent(items));
     gameEntity.addComponent(new UserComponent(user));
     gameEntity.addComponent(new TimerComponent(state.timer));
+    gameEntity.addComponent(new ItemsComponent(items));
+    gameEntity.addComponent(new ReferralsComponent(referrals));
 
     storageSystem.setEntity(gameEntity);
 
@@ -77,6 +90,23 @@ async function initApp() {
         tick(currentTime);
     });
     console.log('Frame requested')
+}
+
+async function claim(userId, referralId) {
+    try {
+        const response = await fetch(`api/${userId}/claim`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            json: { referralId: referralId },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to save state');
+        }
+    } catch (error) {
+        console.error('Error saving state:', error);
+    }
 }
 
 function tick(currentTime) {

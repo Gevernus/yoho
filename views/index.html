@@ -50,6 +50,78 @@
             width: 100px;
             height: 100px;
         }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            display: flex;
+            gap: 13px;
+            flex-direction: column;
+            justify-content: center;
+            color: #004D94;
+            background-color: #96E2FF;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            width: 330px;
+            height: 290px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            width: 120px;
+            align-self: center;
+        }
+
+        .modal-text {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .cost-info {
+            justify-content: center;
+            display: flex;
+            font-family: 'PixelSplitter';
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .modal-button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .update-btn {
+            margin-left: 10px;
+        }
+
+        #coin-modal {
+            width: 17px;
+            margin-left: 5px;
+        }
+
+        #increase {
+            display: flex;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        #itemCost {
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -87,6 +159,27 @@
     <script type="module" src="/systems.js"></script>
     <script type="module" src="/components.js"></script>
     <script type="module" src="/index.js"></script>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <img class="modal-title" src="/images/level-up.svg" alt="levelup">
+            <div class="modal-text">Do you want to upgrade <span id="itemName"></span> to level <span id="itemLevel"></span>?
+            </div>
+            <div class="cost-info">COINS: <span id="yourCoins"></span>
+                <img id="coin-modal" src="/images/mini-coin.svg" alt="mini-coin">
+            </div>
+            <div class="cost-info">COST: <span id="itemCost"></span>
+                <img id="coin-modal" src="/images/mini-coin.svg" alt="mini-coin">
+            </div>
+            <div id="increase">Increase: +<span id="itemBonus"></span>/h
+                <img id="coin-modal" src="/images/mini-coin.svg" alt="mini-coin">
+            </div>
+            <div class="modal-button-container">
+                <img class="update-btn" src="/images/update-button.svg" alt="">
+                <img class="cancel-btn" src="/images/cancel-button.svg" alt="">
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

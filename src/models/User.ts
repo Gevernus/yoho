@@ -1,4 +1,5 @@
 import { Entity, Column, OneToMany, BaseEntity, PrimaryColumn } from "typeorm"
+import { Referral } from "./Referral"
 
 @Entity()
 export class User extends BaseEntity {
@@ -16,4 +17,7 @@ export class User extends BaseEntity {
 
     @Column({ nullable: true })
     language_code!: string;
+
+    @OneToMany(() => Referral, referral => referral.inviter)
+    referrals!: Referral[]
 }
