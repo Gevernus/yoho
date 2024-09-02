@@ -153,17 +153,28 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script type="module" src="/systemManager.js"></script>
     <script type="module" src="/ecs.js"></script>
     <script type="module" src="/systems.js"></script>
     <script type="module" src="/components.js"></script>
     <script type="module" src="/index.js"></script>
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://aura-tg.ru/tonconnect-manifest.json',
+            buttonRootId: 'ton-connect'
+        });
+        tonConnectUI.uiOptions = {
+            twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
+        };
+    </script>
 
     <div id="modal" class="modal-overlay">
         <div class="modal-content">
             <img class="modal-title" src="/images/level-up.svg" alt="levelup">
-            <div class="modal-text">Do you want to upgrade <span id="itemName"></span> to level <span id="itemLevel"></span>?
+            <div class="modal-text">Do you want to upgrade <span id="itemName"></span> to level <span
+                    id="itemLevel"></span>?
             </div>
             <div class="cost-info">COINS: <span id="yourCoins"></span>
                 <img id="coin-modal" src="/images/mini-coin.svg" alt="mini-coin">

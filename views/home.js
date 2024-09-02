@@ -6,7 +6,7 @@ export function init(entity) {
     const timerComponent = entity.getComponent('TimerComponent');
     const inputComponent = entity.getComponent('InputComponent');
     const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
-    
+
     claimButton.addEventListener("click", () => {
         coinsComponent.amount += passiveIncomeComponent.incomePerHour;
         timerComponent.timer = 0;
@@ -15,7 +15,27 @@ export function init(entity) {
     buySkipper.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "bot" });
     });
+    
 };
+
+function renderClaimComponent(entity){
+    const claimContainer = document.getElementById("claim-container");
+    const incomeContainer = document.getElementById("income");
+    const timerContainer = document.querySelector(".timer-container");
+    if (timerComponent.timer >= 3600) {
+        claimContainer.style.display = 'flex';
+        timerContainer.style.display = 'none';
+        incomeContainer.style.display = 'none';
+        const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
+        const claimValue = document.getElementById("claim-value-coins");
+        claimValue.textContent = passiveIncomeComponent.incomePerHour;
+
+    } else {
+        claimContainer.style.display = 'none';
+        timerContainer.style.display = 'flex';
+        incomeContainer.style.display = 'flex';
+    }
+}
 
 export function render(entity) {
     const timerFill = document.querySelector('.timer-fill');
