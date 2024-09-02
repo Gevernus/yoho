@@ -4,10 +4,16 @@ export function init(entity) {
     const claimButton = document.getElementById("claim-button");
     const coinsComponent = entity.getComponent('CoinsComponent');
     const timerComponent = entity.getComponent('TimerComponent');
+    const inputComponent = entity.getComponent('InputComponent');
     const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
+    
     claimButton.addEventListener("click", () => {
         coinsComponent.amount += passiveIncomeComponent.incomePerHour;
         timerComponent.timer = 0;
+    });
+
+    buySkipper.addEventListener("click", () => {
+        inputComponent.addInput("setView", { view: "bot" });
     });
 };
 
