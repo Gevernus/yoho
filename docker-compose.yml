@@ -1,21 +1,21 @@
 services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: main
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: adminbpassword
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    networks:
-      - skipper-network
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U admin -d main" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # db:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: main
+  #     POSTGRES_USER: admin
+  #     POSTGRES_PASSWORD: adminbpassword
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   networks:
+  #     - skipper-network
+  #   ports:
+  #     - "5432:5432"
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -U admin -d main" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
   app:
     build: .
     ports:
@@ -24,11 +24,11 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_DATABASE=main
-      - DB_USERNAME=admin
-      - DB_PASSWORD=adminbpassword
+      - DB_HOST=79.174.88.214
+      - DB_PORT=16685
+      - DB_DATABASE=db1
+      - DB_USERNAME=user1
+      - DB_PASSWORD=beQzojU$#1re0FZ2o70ijJ5w
     networks:
       - skipper-network
   nginx:
