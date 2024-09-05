@@ -8,6 +8,13 @@ export function init(entity) {
     const connectButton = document.querySelector(".wallet-connect");
     const disconnectButton = document.querySelector(".wallet-disconnect");
     disconnectButton.style.display = 'none';
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://aura-tg.ru/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect'
+    });
+    tonConnectUI.uiOptions = {
+        twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
+    };
 };
 
 export function render(entity) {

@@ -1,30 +1,399 @@
-<div id="page-content">
-  <header class="p-6 text-center">
-    <h1 class="game-title">
-      Tasks
-    </h1>
-  </header>
-  <div class="info-area mb-8 w-full max-w-md info-area-shadow">
-    <div class="info-row flex justify-between items-center">
-      <span class="flex items-center">
-        <span class="icon icon-coin"></span>
-        <span id="coins" class="font-bold">0</span>
-      </span>
-      <span class="flex items-center passive-element">
-        <span class="icon icon-passive-income"></span>
-        <span id="passiveIncome" class="font-bold">1</span>
-      </span>
+<head>
+  <style>
+    #task-content {
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-direction: column;
+      height: 615px;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-top: 20px;
+      font-family: "PixelSplitter", sans-serif;
+      font-size: 14px;
+      color: #004d94;
+      text-align: center;
+    }
+
+    #task-upper {
+      text-align: center;
+      align-items: center;
+      width: 50%;
+    }
+
+    .task-daily-title {
+
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+
+    #task-claims {
+      border-radius: 100px;
+      width: 98%;
+      height: 70px;
+      box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+      background: #cbf9ff60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .task-claims-item {
+      width: 61px;
+      height: 61px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: url(images/claimed.svg) 50% 50% / 140% no-repeat;
+
+    }
+
+    .task-claims-value {
+      font-size: 19px;
+      line-height: .8;
+      text-align: center;
+      background: linear-gradient(90deg, #0286ff 0%, #004382 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .task-claims-day {
+      font-size: 9px;
+      text-align: center;
+      background: linear-gradient(90deg, #0286ff 0%, #004382 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .task-claims-text {
+      font-size: 6px;
+      text-align: center;
+      background: linear-gradient(90deg, #0286ff 0%, #004382 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .task-invite-title {
+      font-size: 14px;
+      text-align: center;
+      color: #004d94;
+      margin-bottom: 5px;
+      margin-top: 20px;
+    }
+
+    .task-rewards {
+      width: 98%;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .task-rewards-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .task-rewards-content {
+      width: 90px;
+      height: 90px;
+      background: url(images/reward-task.svg) 50% 50% / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .task-rewards-value {
+      font-size: 25px;
+      line-height: .8;
+      text-align: center;
+      background: linear-gradient(90deg, #0286ff 0%, #004382 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .task-rewards-text {
+      font-size: 9px;
+      text-align: center;
+      background: linear-gradient(90deg, #0286ff 0%, #004382 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .task-rewards-button {
+      border-radius: 50px;
+      padding: 5px;
+      border: none;
+      min-width: 60px;
+      height: 20px;
+      box-shadow: 5px 5px 13px 0 rgba(0, 173, 111, 0.9), -5px -5px 10px 0 rgba(0, 255, 215, 0.9), 5px -5px 10px 0 rgba(0, 173, 111, 0.2), -5px 5px 10px 0 rgba(0, 173, 111, 0.2), inset -1px -1px 2px 0 rgba(0, 173, 111, 0.5), inset 1px 1px 2px 0 rgba(0, 255, 215, 0.3);
+      background: #00ffa3;
+      font-size: 8px;
+      color: #004d94;
+      text-align: center;
+    }
+
+    .task-league-title {
+      font-size: 14px;
+      text-align: center;
+      color: #004d94;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .task-league-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .task-league-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      box-shadow: 8px 8px 21px 0 rgba(86, 194, 230, 0.9), -8px -8px 16px 0 rgba(106, 237, 255, 0.9), 8px -8px 16px 0 rgba(86, 194, 230, 0.2), -8px 8px 16px 0 rgba(86, 194, 230, 0.2), inset -2px -2px 3px 0 rgba(86, 194, 230, 0.5), inset 2px 2px 3px 0 rgba(106, 237, 255, 0.3);
+      width: 90px;
+      height: 90px;
+      background: url(images/reward-league.svg) 40% 60% / 130% no-repeat;
+    }
+
+    #task-users {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 90%;
+    }
+
+    .task-user {
+      width: 100%;
+      border-radius: 19px;
+      padding: 5px 6px 7px 10px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+      background: #fff;
+    }
+
+    .task-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .task-name {
+      text-align: left;
+      font-size: 10px;
+      color: #004d94;
+    }
+
+    .task-coin {
+      font-family: "PF Agora Slab Pro", sans-serif;
+      color: #004c9494;
+
+    }
+
+    .task-coin-img {
+      width: 11px;
+    }
+
+    .task-arrow {
+      width: 27px;
+      height: 27px;
+      border-radius: 100%;
+      overflow: hidden;
+      box-shadow: 0 3px 4px 0 rgba(0, 39, 75, 0.29);
+    }
+
+    .task-arrow img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .task-pool {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<img id="back-button" src="/images/back-button.svg" alt="back-button">
+<div id="task-content">
+  <div id="task-upper">
+    <img id="task-title" src="/images/task-title.svg" alt="task">
+  </div>
+  <div>
+    <div class="task-daily-title">Daily reward</div>
+    <div id="task-claims">
+      <div class="task-claims-item">
+        <span class="task-claims-value">1</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
+      <div class="task-claims-item">
+        <span class="task-claims-value">2</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
+      <div class="task-claims-item">
+        <span class="task-claims-value">3</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
+      <div class="task-claims-item">
+        <span class="task-claims-value">4</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
+      <div class="task-claims-item">
+        <span class="task-claims-value">5</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
+      <div class="task-claims-item">
+        <span class="task-claims-value">6</span>
+        <span class="task-claims-day">day</span>
+        <span class="task-claims-text">claimed</span>
+      </div>
     </div>
   </div>
-  <div id="shop-tabs">
-    <button class="tab-button active" data-tab="active">Active</button>
-    <button class="tab-button" data-tab="completed">Completed</button>
+  <div>
+    <div class="task-invite-title">Invite reward</div>
+    <div class="task-rewards">
+      <div class="task-rewards-item">
+        <div class="task-rewards-content">
+          <div class="task-rewards-value">1</div>
+          <span class="task-rewards-text">Invites</span>
+        </div>
+        <!-- <button class="task-rewards-button">
+          <span>Claim</span>
+        </button> -->
+      </div>
+      <div class="task-rewards-item">
+        <div class="task-rewards-content">
+          <div class="task-rewards-value">10</div>
+          <span class="task-rewards-text">Invites</span>
+        </div>
+        <!-- <button class="task-rewards-button">
+          <span>invite </span>
+          <span id="task-more-value10">1</span>
+          <span> more</span>
+        </button> -->
+      </div>
+      <div class="task-rewards-item">
+        <div class="task-rewards-content">
+          <div class="task-rewards-value">20</div>
+          <span class="task-rewards-text">Invites</span>
+        </div>
+        <!-- <button class="task-rewards-button">
+          <span>invite </span>
+          <span id="task-more-value20">10</span>
+          <span> more</span>
+        </button> -->
+      </div>
+      <div class="task-rewards-item">
+        <div class="task-rewards-content">
+          <div class="task-rewards-value">50</div>
+          <span class="task-rewards-text">Invites</span>
+        </div>
+        <!-- <button class="task-rewards-button">
+          <span>invite </span>
+          <span id="task-more-value50">30</span>
+          <span> more</span>
+        </button> -->
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="task-league-title">League reward</div>
+    <div class="task-league-list">
+      <div class="task-league-item">
+        <img src="images/bronze-cup.svg" alt="">
+      </div>
+      <div class="task-league-item">
+        <img src="images/silver-cup.svg" alt="">
+      </div>
+      <div class="task-league-item">
+        <img src="images/gold-cup.svg" alt="">
+      </div>
+      <div class="task-league-item">
+        <img src="images/platinum-cup.svg" alt="">
+      </div>
+    </div>
   </div>
 
-  <div id="shop-content">
-    <div id="active-container" class="tab-content active scrollable-container">
+  <div class="task-pool">
+    <img src="images/task-pool.svg" alt="task pool">
+  </div>
+  <div id="task-users">
+    <div class="task-user">
+      <div class="task-info">
+        <div class="task-name">Compaigns 1</div>
+        <div class="task-coin">
+          <img class="task-coin-img" src="images/mini-coin.svg" alt="">
+          <span>0</span>
+          <span>/</span>
+          <span>100,000</span>
+        </div>
+      </div>
+      <div class="task-arrow">
+        <img src="images/arrow-task.svg" alt="arrow">
+      </div>
     </div>
-    <div id="completed-container" class="tab-content scrollable-container">
+    <div class="task-user">
+      <div class="task-info">
+        <div class="task-name">Compaigns 1</div>
+        <div class="task-coin">
+          <img class="task-coin-img" src="images/mini-coin.svg" alt="">
+          <span>0</span>
+          <span>/</span>
+          <span>100,000</span>
+        </div>
+      </div>
+      <div class="task-arrow">
+        <img src="images/arrow-task.svg" alt="arrow">
+      </div>
+    </div>
+    <div class="task-user">
+      <div class="task-info">
+        <div class="task-name">Compaigns 1</div>
+        <div class="task-coin">
+          <img class="task-coin-img" src="images/mini-coin.svg" alt="">
+          <span>0</span>
+          <span>/</span>
+          <span>100,000</span>
+        </div>
+      </div>
+      <div class="task-arrow">
+        <img src="images/arrow-task.svg" alt="arrow">
+      </div>
+    </div>
+    <div class="task-user">
+      <div class="task-info">
+        <div class="task-name">Compaigns 1</div>
+        <div class="task-coin">
+          <img class="task-coin-img" src="images/mini-coin.svg" alt="">
+          <span>0</span>
+          <span>/</span>
+          <span>100,000</span>
+        </div>
+      </div>
+      <div class="task-arrow">
+        <img src="images/arrow-task.svg" alt="arrow">
+      </div>
     </div>
   </div>
+
 </div>

@@ -1,0 +1,210 @@
+<head>
+    <style>
+        #league-content {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            height: 615px;
+            padding-right: 10px;
+            padding-left: 10px;
+            padding-top: 20px;
+        }
+
+        #league-upper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .league-subtitle {
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 0 4px 4px 0 rgba(106, 121, 197, 0.25);
+        }
+
+        .league-wrapper {
+            position: relative;
+            width: 90%;
+        }
+
+        .swiper {
+            width: 70%;
+        }
+
+        .league-img-cup img {
+            width: 150px;
+        }
+
+        .league-img-cup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #league-button-back {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            border: none;
+            border-radius: 15px;
+            width: 40px;
+            height: 40px;
+            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            background: #fff;
+        }
+
+        #league-button-next {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            border: none;
+            border-radius: 15px;
+            width: 40px;
+            height: 40px;
+            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            background: #fff;
+        }
+
+        .league-value {
+            border-radius: 30px;
+            padding: 8px 9px;
+            width: 220px;
+            height: 35px;
+            box-shadow: -1px -1px 2px 0 rgba(122, 162, 209, 0.5), 1px 1px 2px 0 rgba(168, 224, 255, 0.3), inset 5px 5px 13px 0 rgba(122, 162, 209, 0.9), inset -5px -5px 10px 0 rgba(168, 224, 255, 0.9), inset 5px -5px 10px 0 rgba(122, 162, 209, 0.2), inset -5px 5px 10px 0 rgba(122, 162, 209, 0.2);
+            background: #91c1f9;
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #004d94;
+        }
+
+        .league-value-inner {
+            border-radius: 20px;
+            padding: 7px 43px;
+            width: 203px;
+            height: 34px;
+            box-shadow: 1px 1px 3px 0 rgba(124, 186, 243, 0.9), -1px -1px 2px 0 rgba(255, 255, 255, 0.9), 1px -1px 2px 0 rgba(194, 205, 243, 0.2), -1px 1px 2px 0 rgba(187, 189, 246, 0.2), inset -1px -1px 2px 0 rgba(129, 170, 207, 0.5), inset 1px 1px 2px 0 rgba(255, 255, 255, 0.3);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #league-bonus {
+            border-radius: 20px;
+            height: 60px;
+            padding: 10px;
+            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            background: #cbf9ff5d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .league-bonus-item {
+            border-radius: 11px;
+            padding: 4px;
+            width: 45px;
+            height: 45px;
+            box-shadow: inset -1px -1px 1px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 1px 0 rgba(106, 237, 255, 0.3), 3px 3px 7px 0 rgba(86, 194, 230, 0.9), -3px -3px 5px 0 rgba(106, 237, 255, 0.9), 3px -3px 5px 0 rgba(86, 194, 230, 0.2), -3px 3px 5px 0 rgba(86, 194, 230, 0.2);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .league-bonus-coin {
+            width: 14px;
+            height: 14px;
+        }
+
+        .league-bonus-value {
+            font-family: var(--font-family);
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 140%;
+            color: #004d94;
+        }
+
+        .league-claim {
+            border-radius: 100px;
+            padding: 10px;
+            width: 116px;
+            height: 35px;
+            box-shadow: 5px 5px 13px 0 rgba(0, 173, 111, 0.9), -5px -5px 10px 0 rgba(0, 255, 215, 0.9), 5px -5px 10px 0 rgba(0, 173, 111, 0.2), -5px 5px 10px 0 rgba(0, 173, 111, 0.2), inset -1px -1px 2px 0 rgba(0, 173, 111, 0.5), inset 1px 1px 2px 0 rgba(0, 255, 215, 0.3);
+            background: #00ffa3;
+            font-family: "PixelSplitter", sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: #004d94;
+            text-align: center;
+        }
+    </style>
+
+    <link href="swiper-bundle.min.css" rel="stylesheet">
+</head>
+
+
+<div id="league-content">
+    <div id="league-upper">
+        <img id="league-title" src="/images/league-title.svg" alt="league">
+    </div>
+    <div class="league-subtitle">Your League</div>
+    <div class="league-wrapper">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="league-img-cup">
+                        <img src="images/bronze-cup.svg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="league-img-cup">
+                        <img src="images/silver-cup.svg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="league-img-cup">
+                        <img src="images/gold-cup.svg" alt="">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="league-img-cup">
+                        <img src="images/platinum-cup.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="league-button-back">
+            <img src="images/arrow-back.svg" alt="">
+        </button>
+
+        <button id="league-button-next">
+            <img src="images/arrow-next.svg" alt="">
+        </button>
+    </div>
+    <div class="league-value">
+        <div class="league-value-inner">
+            <span id="league-value-total">2000</span>
+            <span> / </span>
+            <span id="league-value-has">2000</span>
+        </div>
+    </div>
+    <div id="league-bonus">
+        <div class="league-bonus-item">
+            <img src="images/shop-item-image.svg" alt="gun">
+        </div>
+        <div class="league-bonus-item">
+            <img class="league-bonus-coin" src="images/mini-coin.svg" alt="coin">
+            <span class="league-bonus-value">1000</span>
+        </div>
+    </div>
+    <div class="league-claim">Claim</div>
+</div>

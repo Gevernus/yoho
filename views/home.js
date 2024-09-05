@@ -1,6 +1,6 @@
 export function init(entity) {
     const buySkipper = document.getElementById("buy-skipper");
-    const backButton = document.getElementById("back-button");
+    
     const claimButton = document.getElementById("claim-button");
     const coinsComponent = entity.getComponent('CoinsComponent');
     const timerComponent = entity.getComponent('TimerComponent');
@@ -15,7 +15,11 @@ export function init(entity) {
     buySkipper.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "bot" });
     });
-    
+
+    const leagueButton = document.querySelector(".league-button");
+    leagueButton.addEventListener("click", () => {
+        inputComponent.addInput("setView", { view: "league" });
+    });
 };
 
 function renderClaimComponent(entity){
