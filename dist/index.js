@@ -26,13 +26,12 @@ async function initApp() {
 
     const lastUpdatedDate = new Date(state.last_updated);
     const now = new Date();
-
-    // Calculate the time difference in seconds
     const elapsedSeconds = Math.floor((now.getTime() - lastUpdatedDate.getTime()) / 1000);
-    console.log(`Added time you was offline to claim timer: `, elapsedSeconds);
-    // Update the timer with the elapsed time
-    state.timer += elapsedSeconds;
+    if (elapsedSeconds > 0) {
+        state.timer += elapsedSeconds;
+    }
 
+    console.log(state.timer);
     systemManager.addSystem(telegramSystem);
     systemManager.addSystem(storageSystem)
     const coinsComponent = new CoinsComponent(state.coins)

@@ -21,8 +21,8 @@ services:
     ports:
       - "3000:3000"
       - "8000:8000"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     environment:
       - DB_HOST=79.174.88.214
       - DB_PORT=16685

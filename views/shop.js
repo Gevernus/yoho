@@ -32,10 +32,10 @@ function setupTabs(shopItems) {
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             // Remove active class from all tabs
-            tabs.forEach(t => t.classList.remove('active'));
+            tabs.forEach(t => t.classList.remove('active-tab'));
 
             // Add active class to the clicked tab
-            tab.classList.add('active');
+            tab.classList.add('active-tab');
 
             // Get the type from the clicked tab
             const type = tab.textContent.toLowerCase();

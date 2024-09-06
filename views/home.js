@@ -57,6 +57,7 @@ export function render(entity) {
     income.textContent = `${passiveIncomeComponent.incomePerHour}/h`;
 
     const timerComponent = entity.getComponent('TimerComponent');
+    console.log(timerComponent.timer);
     timerNumber.textContent = (timerComponent.timer / 60).toFixed(0);
     const widthPercentage = (timerComponent.timer / 3600) * 90;
 

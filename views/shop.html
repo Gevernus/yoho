@@ -159,14 +159,19 @@
       box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
       color: #7da8cf;
       text-align: center;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+      transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
     }
 
-    .tab.active {
+    .active-tab {
       background: linear-gradient(145deg, #ffffff, #d0eaff);
       box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
       color: #0d5f9b;
+    }
+
+    .tab:active {
+      background: #7da8cf;
+      color: white;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     .item-image {
@@ -259,12 +264,12 @@
   </div>
   <div id="shop-container">
     <div id="tabs">
-      <div class="tab active"><span id="tab-text">Ship</span></div>
+      <div class="tab active-tab"><span id="tab-text">Ship</span></div>
       <div class="tab"><span id="tab-text">Crew</span></div>
       <div class="tab"><span id="tab-text">Logistic</span></div>
       <div class="tab"><span id="tab-text">Skins</span></div>
     </div>
     <div id="shop-elements">
-    
+
     </div>
   </div>
