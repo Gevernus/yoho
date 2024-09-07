@@ -12,17 +12,17 @@ body {
 }
 
 #mini-coin {
-    width: 30px;
-    height: 30px;
+    width: 3.2vh;
+    height: 3.2vh;
 }
 
 #income {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.3vw;
     justify-content: center;
     color: #004D94;
-    font-size: 12px;
+    font-size: 1.3vh;
 }
 
 #back-button {

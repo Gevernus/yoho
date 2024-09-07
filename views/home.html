@@ -1,25 +1,34 @@
 <head>
   <style>
+    .container {
+        height: 100%;
+      }
+
     #page-content {
+      width: 100%;
+      height: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       flex-direction: column;
     }
+    #yoho {
+      width: 100%;
+    }
 
     #upper-block {
-      margin-top: 20px;
+      margin-top: 2vh;
       width: 62%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 5px;
+      gap: .5vh;
     }
 
     #coin-container {
       width: 100%;
-      height: 64px;
+      height: 6.6vh;
       display: flex;
       align-items: center;
       position: relative;
@@ -34,18 +43,18 @@
     #coin {
       position: relative;
       z-index: 2;
-      margin-left: 10px;
-      width: 52px;
-      height: 52px;
+      margin-left: 1vw;
+      width: 5.5vh;
+      height: 5.5vh;
     }
 
     #coin-value {
       position: relative;
       z-index: 2;
       font-family: 'PixelSplitter', sans-serif;
-      font-size: 34px;
+      font-size: 3.4vh;
       color: #FFFFFF;
-      margin-left: 10px;
+      margin-left: 1vw;
       text-align: center;
       width: 100%;
       margin-right: 10%;
@@ -77,12 +86,8 @@
       flex-direction: column;
     }
 
-    #buy-skipper {
-      height: 65px;
-    }
-
     #claim-button {
-      height: 65px;
+      height: 6.4vh;
     }
 
     .timer-container {
@@ -95,7 +100,7 @@
     #time-container {
       position: relative;
       left: calc(50%);
-      width: 50px;
+      width: 15vw;
       top: 20%;
     }
 
@@ -106,22 +111,22 @@
       display: flex;
       justify-content: left;
       align-items: center;
-      width: 220px;
-      height: 50px;
+      width: 55vw;
+      height: 5.5vh;
     }
 
     .timer-number {
       font-family: 'PixelSplitter', sans-serif;
-      font-size: 12px;
+      font-size: 1.3vh;
       color: #004D94;
       z-index: 1;
     }
 
     .timer-unit {
       font-family: 'Arial', sans-serif;
-      font-size: 12px;
+      font-size: 1.3vh;
       color: #004D94;
-      margin-top: 3px;
+      margin-top: .3vh;
       z-index: 1;
     }
 
@@ -131,7 +136,7 @@
       height: 67%;
       background-color: white;
       width: 60%;
-      border-radius: 20px;
+      border-radius: 2vh;
       box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1), inset 0px -1px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.25);
     }
 
@@ -140,6 +145,7 @@
     }
 
     #buy-skipper {
+      height: 6.5vh;
       margin-top: 10px;
     }
 
@@ -162,13 +168,16 @@
     #claim-container {
       display: flex;
       flex-direction: column;
-      width: 150px;
-      height: 140px;
+      width: 100%;
+      height: 14vh;
     }
 
     #claim-values {
       display: flex;
-      background-image: url('/images/claim-value-back.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url(/images/claim-value-back.svg);
       width: 100%;
       height: 100%;
     }
@@ -176,40 +185,39 @@
     .claim-value {
       display: flex;
       flex-direction: column;
-      background-image: url('/images/claim-value.svg');
-      height: 100%;
+      background-image: url(/images/claim-value.svg);
+      height: 90%;
       width: 100%;
-      background-size: auto;
+      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      margin-right: 1px;
-      margin-top: 8px;
+      margin: auto 0;
     }
 
     #mini-coin-claim {
       align-self: center;
-      margin-top: 20px;
-      width: 16px;
+      margin-top: 2vh;
+      width: 1.8vh;
     }
 
     #claim-value-coins {
       color: #004D94;
       align-self: center;
-      font-size: 15px;
+      font-size: 1.6vh;
     }
 
     .league-button {
       margin: 20px;
       border-radius: 100px;
-      padding: 10px;
-      width: 144px;
-      height: 35px;
+      padding: 1vh;
+      width: 40vw;
+      height: 3.7vh;
       box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
       background: #fff;
       border: none;
       font-family: "PixelSplitter", sans-serif;
       font-weight: 700;
-      font-size: 12px;
+      font-size: 1.4vh;
       color: #004d94
     }
   </style>
@@ -243,7 +251,7 @@
         <div class="timer-fill">
           <div id="time-container">
             <span class="timer-number"></span>
-            <span class="timer-unit"></span>
+            <span class="timer-unit">min</span>
           </div>
         </div>
       </div>
