@@ -26,8 +26,9 @@ body {
 }
 
 #back-button {
+    width: 7vh;
     position: absolute;
-    top: 10px;
+    top: 4.5vh;
 }
 
 #back-button:active {
@@ -40,4 +41,14 @@ body {
     src: url('/fonts/PixelSplitter-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'PF Agora Slab Pro';
+    src: local('PFAgoraSlabPro-Medium'),
+        url('/fonts/PFAgoraSlabPro-Medium.woff2') format('woff2'),
+        url('/fonts/PFAgoraSlabPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
