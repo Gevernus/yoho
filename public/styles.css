@@ -45,10 +45,7 @@ body {
 
 @font-face {
     font-family: 'PF Agora Slab Pro';
-    src: local('PFAgoraSlabPro-Medium'),
-        url('/fonts/PFAgoraSlabPro-Medium.woff2') format('woff2'),
-        url('/fonts/PFAgoraSlabPro-Medium.woff') format('woff');
+    src: url('/fonts/PFAgoraSlabPro-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
-    font-display: swap;
 }
