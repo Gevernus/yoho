@@ -1,22 +1,36 @@
 <head>
   <style>
+    *,
+    *:before,
+    *:after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .container {
+      height: 100%;
+    }
+
     #head-info {
-      padding-left: 25px;
-      padding-right: 25px;
+      width: 80%;
+      padding-left: 3vh;
+      padding-right: 3vh;
       display: flex;
       justify-content: space-between;
-      height: 95px;
+      height: 9.5vh;;
       background-image: url('/images/shop-head.svg');
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
     }
 
     #combo-container {
+      padding: 1vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 165px;
+      height: 20vh;
       background-image: url('/images/combo-container.svg');
       background-size: contain;
       background-repeat: no-repeat;
@@ -29,43 +43,45 @@
     }
 
     #combo-elements {
-      height: 95px;
+      margin: 1vh 1vh 0 1vh;
+      height: 9.5vh;
       display: flex;
-      margin-right: 10px;
+      align-items: center;
+      justify-content: center;
     }
 
     #combo-text {
+      font-size: 1.4vh;
       margin-left: 40%;
       color: #004D94;
-      margin-bottom: 5px;
+      margin-bottom: .5vh;
     }
 
     #coin-shop {
-      width: 15px;
-      height: 15px;
-      margin-bottom: 4px;
+      width: 1.5vh;
+      height: 1.5vh;
+      margin-bottom: .4vh;
     }
 
     #claim-element {
       width: 100%;
-      height: 59px;
+      height: 6vh;
       align-items: center;
       display: flex;
-      gap: 5px;
-      background-image: url('/images/bonus-rectangle.svg');
+      gap: .5vh;
+      background-image: url(/images/bonus-rectangle.svg);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
 
     #shop-container {
+      margin-bottom: 3.8vh;
       width: 95%;
-      height: 270px;
-      border-radius: 20px;
+      height: 32vh;
+      border-radius: 2vh;
       background: linear-gradient(180deg, #98e0ff, #a6cfff);
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-      margin-left: 2.5%;
-      margin-right: 2.5%;
     }
 
     #shop-background {
@@ -77,25 +93,30 @@
 
     #combo-label {
       font-family: 'PixelSplitter', sans-serif;
-      font-size: 19px;
+      font-size: 1.9vh;
       color: #FFFFFF;
       text-align: center;
       width: 100%;
     }
 
     #page-content {
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      padding-top: 20px;
+      align-items: center;
+      justify-content: space-between;
+      /* padding-top: 20px; */
     }
 
     #shop-label {
-      height: 47px;
+      margin-top: 4.8vh;
+      height: 6.7vh;
     }
 
     #player-avatar {
-      width: 45px;
-      height: 45px;
+      width: 4.5vh;
+      height: 4.5vh;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
@@ -104,39 +125,64 @@
     }
 
     #player-username {
+      font-family: "PF Agora Slab Pro", sans-serif;
+      font-weight: 500;
+      font-size: 1.5vh;
+      line-height: 1.2;
+      color: #004d94;
       align-self: center;
     }
 
     #left-side {
       display: flex;
-      gap: 15px
+      gap: 1.5vh;
     }
 
     #income-text {
+      font-family: "PF Agora Slab Pro", sans-serif;
+      font-weight: 500;
+      font-size: 1.5vh;
+      line-height: 140%;
       color: #004D94;
-      font-size: 16px;
     }
 
     #coins-text {
+      font-family: "PixelSplitter", sans-serif;
+      font-size: 1.5vh;
       color: #004D94;
-      font-size: 16px;
+    }
+    #coin-header {
+      width: 3vh;
+      height: 3vh;
     }
 
     .combo-element {
-      margin-top: 10px;
-      width: 85px;
+      position: relative;
+      display: flex;
+      height: 9vh;
+      width: 9vh;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1vh;
+    }
+    .combo-element img:first-child {
+      width: 100%;
     }
 
     .combo-item {
-      position: relative;
-      top: -90px;
-      left: 15px;
+      transform: translate(-50%, -50%);
+      width: 6.5vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
     }
 
     .combo-lock {
-      position: relative;
-      top: -147px;
-      left: 35px;
+      transform: translate(-50%, -50%);
+      width: 8vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
       background-color: #a49f9fa6;
       border-radius: 50px;
     }
@@ -145,18 +191,18 @@
       display: flex;
       position: relative;
       justify-content: center;
-      gap: 7px;
-      margin-top: 8px;
+      gap: .7vh;
+      margin-top: .8vh;
     }
 
     .tab {
-      font-size: 13px;
-      width: 80px;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      border-radius: 15px;
+      font-size: 1.3vh;
+      width: 18vw;
+      padding-top: .6vh;
+      padding-bottom: .6vh;
+      border-radius: 1.5vh;
       background: #c3e4ff;
-      box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0vh .5vh 1vh rgba(255, 255, 255, 0.7), 0vh .5vh 1vh rgba(0, 0, 0, 0.1);
       color: #7da8cf;
       text-align: center;
       transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
@@ -164,7 +210,7 @@
 
     .active-tab {
       background: linear-gradient(145deg, #ffffff, #d0eaff);
-      box-shadow: inset 0px 5px 10px rgba(255, 255, 255, 0.7), 0px 5px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0vh .5vh 1vh rgba(255, 255, 255, 0.7), 0vh .5vh 1vh rgba(0, 0, 0, 0.1);
       color: #0d5f9b;
     }
 
@@ -175,41 +221,47 @@
     }
 
     .item-image {
-      position: relative;
-      top: -125px;
-      scale: 0.8;
+      width: 10vh;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
     }
 
     .item-footer {
-      position: relative;
-      font-size: 11px;
-      top: -134px;
-      left: 16px;
+      display: flex;
+      gap: 1vw;
+      position: absolute;
+      font-size: 1.3vh;
+      bottom: 0;
+      left: 2vh;
       color: #004D94;
     }
 
     .item-coin {
-      width: 10px;
+      width: 1.4vh;
     }
 
     .plus-income {
-      margin-left: 17px;
+      
     }
 
     .shop-element {
+      position: relative;
       display: flex;
       flex-direction: column;
-      width: 123px;
-      height: 130px;
+      width: 12.3vh;
+      height: 13vh;
     }
 
     #shop-elements {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      margin-top: 5px;
-      height: 229px;
+      margin-top: 1vh;
+      height: 26vh;
       overflow-x: hidden;
       overflow-y: auto;
+      justify-items: center;
     }
 
     .item-back {
