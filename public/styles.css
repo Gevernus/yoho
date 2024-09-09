@@ -12,22 +12,23 @@ body {
 }
 
 #mini-coin {
-    width: 30px;
-    height: 30px;
+    width: 3.2vh;
+    height: 3.2vh;
 }
 
 #income {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.3vw;
     justify-content: center;
     color: #004D94;
-    font-size: 12px;
+    font-size: 1.4vh;
 }
 
 #back-button {
+    width: 7vh;
     position: absolute;
-    top: 10px;
+    top: 4.5vh;
 }
 
 #back-button:active {
@@ -39,5 +40,12 @@ body {
     font-family: 'PixelSplitter';
     src: url('/fonts/PixelSplitter-Bold.ttf') format('truetype');
     font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PF Agora Slab Pro';
+    src: url('/fonts/PFAgoraSlabPro-Medium.ttf') format('truetype');
+    font-weight: 500;
     font-style: normal;
 }

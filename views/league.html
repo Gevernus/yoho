@@ -1,14 +1,24 @@
 <head>
     <style>
+        *,
+        *:before,
+        *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .container {
+            height: 100%;
+        }
+
         #league-content {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: center;
             flex-direction: column;
-            height: 615px;
-            padding-right: 10px;
-            padding-left: 10px;
-            padding-top: 20px;
+            width: 100%;
+            height: 100%;
         }
 
         #league-upper {
@@ -16,14 +26,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            margin-top: 4.8vh;
+        }
+
+        #league-title {
+            height: 6.7vh;
         }
 
         .league-subtitle {
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 2vh;
             color: #fff;
-            text-shadow: 0 4px 4px 0 rgba(106, 121, 197, 0.25);
+            text-shadow: 0 .4vh .4vh 0 rgba(106, 121, 197, 0.25);
         }
 
         .league-wrapper {
@@ -36,7 +51,7 @@
         }
 
         .league-img-cup img {
-            width: 150px;
+            height: 25vh;
         }
 
         .league-img-cup {
@@ -51,11 +66,15 @@
             top: 50%;
             left: 0;
             border: none;
-            border-radius: 15px;
-            width: 40px;
-            height: 40px;
-            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            border-radius: 1.5vh;
+            width: 4vh;
+            height: 4vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #fff;
+        }
+
+        #league-button-back img {
+            width: 60%;
         }
 
         #league-button-next {
@@ -63,32 +82,36 @@
             top: 50%;
             right: 0;
             border: none;
-            border-radius: 15px;
-            width: 40px;
-            height: 40px;
-            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            border-radius: 1.5vh;
+            width: 4vh;
+            height: 4vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #fff;
         }
 
+        #league-button-next img {
+            width: 60%;
+        }
+
         .league-value {
-            border-radius: 30px;
-            padding: 8px 9px;
-            width: 220px;
-            height: 35px;
-            box-shadow: -1px -1px 2px 0 rgba(122, 162, 209, 0.5), 1px 1px 2px 0 rgba(168, 224, 255, 0.3), inset 5px 5px 13px 0 rgba(122, 162, 209, 0.9), inset -5px -5px 10px 0 rgba(168, 224, 255, 0.9), inset 5px -5px 10px 0 rgba(122, 162, 209, 0.2), inset -5px 5px 10px 0 rgba(122, 162, 209, 0.2);
+            border-radius: 3vh;
+            padding: .8vh .9vh;
+            width: 36vw;
+            height: 5vh;
+            box-shadow: -.1vh -.1vh .2vh 0 rgba(122, 162, 209, 0.5), .1vh .1vh .2vh 0 rgba(168, 224, 255, 0.3), inset .5vh .5vh 1.3vh 0 rgba(122, 162, 209, 0.9), inset -.5vh -.5vh 1vh 0 rgba(168, 224, 255, 0.9), inset .5vh -.5vh 1vh 0 rgba(122, 162, 209, 0.2), inset -.5vh .5vh 1vh 0 rgba(122, 162, 209, 0.2);
             background: #91c1f9;
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 1.6vh;
             color: #004d94;
         }
 
         .league-value-inner {
-            border-radius: 20px;
-            padding: 7px 43px;
-            width: 203px;
-            height: 34px;
-            box-shadow: 1px 1px 3px 0 rgba(124, 186, 243, 0.9), -1px -1px 2px 0 rgba(255, 255, 255, 0.9), 1px -1px 2px 0 rgba(194, 205, 243, 0.2), -1px 1px 2px 0 rgba(187, 189, 246, 0.2), inset -1px -1px 2px 0 rgba(129, 170, 207, 0.5), inset 1px 1px 2px 0 rgba(255, 255, 255, 0.3);
+            border-radius: 2vh;
+            padding: .7vh 4.3vh;
+            width: 32vw;
+            height: 3.3vh;
+            box-shadow: .1vh .1vh .3vh 0 rgba(124, 186, 243, 0.9), -.1vh -.1vh .2vh 0 rgba(255, 255, 255, 0.9), .1vh -.1vh .2vh 0 rgba(194, 205, 243, 0.2), -.1vh .1vh .2vh 0 rgba(187, 189, 246, 0.2), inset -.1vh -.1vh .2vh 0 rgba(129, 170, 207, 0.5), inset .1vh .1vh .2vh 0 rgba(255, 255, 255, 0.3);
             background: #fff;
             display: flex;
             align-items: center;
@@ -96,23 +119,23 @@
         }
 
         #league-bonus {
-            border-radius: 20px;
-            height: 60px;
-            padding: 10px;
-            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            border-radius: 2vh;
+            height: 7vh;
+            padding: 1vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #cbf9ff5d;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 1vh;
         }
 
         .league-bonus-item {
-            border-radius: 11px;
-            padding: 4px;
-            width: 45px;
-            height: 45px;
-            box-shadow: inset -1px -1px 1px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 1px 0 rgba(106, 237, 255, 0.3), 3px 3px 7px 0 rgba(86, 194, 230, 0.9), -3px -3px 5px 0 rgba(106, 237, 255, 0.9), 3px -3px 5px 0 rgba(86, 194, 230, 0.2), -3px 3px 5px 0 rgba(86, 194, 230, 0.2);
+            border-radius: 1.2vh;
+            padding: .4vh;
+            width: 5vh;
+            height: 5vh;
+            box-shadow: inset -.1vh -.1vh .1vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .1vh 0 rgba(106, 237, 255, 0.3), .3vh .3vh .7vh 0 rgba(86, 194, 230, 0.9), -.3vh -.3vh .5vh 0 rgba(106, 237, 255, 0.9), .3vh -.3vh .5vh 0 rgba(86, 194, 230, 0.2), -.3vh .3vh .5vh 0 rgba(86, 194, 230, 0.2);
             background: #fff;
             display: flex;
             flex-direction: column;
@@ -120,29 +143,34 @@
             justify-content: center;
         }
 
+        .league-bonus-item img {
+            width: 100%;
+        }
+
         .league-bonus-coin {
-            width: 14px;
-            height: 14px;
+            width: 1.6vh;
+            height: 1.6vh;
         }
 
         .league-bonus-value {
-            font-family: var(--font-family);
+            font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 1.5vh;
             line-height: 140%;
             color: #004d94;
         }
 
         .league-claim {
+            margin-bottom: 3.8vh;
             border-radius: 100px;
-            padding: 10px;
-            width: 116px;
-            height: 35px;
-            box-shadow: 5px 5px 13px 0 rgba(0, 173, 111, 0.9), -5px -5px 10px 0 rgba(0, 255, 215, 0.9), 5px -5px 10px 0 rgba(0, 173, 111, 0.2), -5px 5px 10px 0 rgba(0, 173, 111, 0.2), inset -1px -1px 2px 0 rgba(0, 173, 111, 0.5), inset 1px 1px 2px 0 rgba(0, 255, 215, 0.3);
+            padding: 1vh;
+            width: 28vw;
+            height: 3.6vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(0, 173, 111, 0.9), -.5vh -.5vh 1vh 0 rgba(0, 255, 215, 0.9), .5vh -.5vh 1vh 0 rgba(0, 173, 111, 0.2), -.5vh .5vh 1vh 0 rgba(0, 173, 111, 0.2), inset -.1vh -.1vh .2vh 0 rgba(0, 173, 111, 0.5), inset .1vh .1vh .2vh 0 rgba(0, 255, 215, 0.3);
             background: #00ffa3;
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 1.5vh;
             color: #004d94;
             text-align: center;
         }

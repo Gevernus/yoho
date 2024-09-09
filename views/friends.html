@@ -8,22 +8,36 @@
             box-sizing: border-box;
         }
 
+        .container {
+            height: 100%;
+        }
+
         #invite-content {
-            padding-top: 20px;
+            width: 100%;
+            height: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             flex-direction: column;
-            height: 635px;
+            
         }
 
         #invite-upper {
-            width: 100%;
+            width: 70%;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 3vh;
             align-items: center;
             justify-content: center;
+            margin-top: 4.8vh;
+        }
+
+        #invite-img {
+            height: 6.7vh;
+        }
+
+        #invite-description {
+            width: 100%;
         }
 
         #invite-tasks {
@@ -32,11 +46,11 @@
             flex-direction: column;
             align-items: start;
             justify-content: center;
-            gap: 20px;
+            gap: 2vh;
             width: 90%;
-            padding: 20px 0;
-            border-radius: 20px;
-            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            padding: 2vh 0;
+            border-radius: 2vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #cbf9ff5d;
         }
 
@@ -44,7 +58,7 @@
             display: flex;
             align-items: center;
             padding-left: 10%;
-            gap: 11px;
+            gap: 1.1vh;
         }
 
         .task-value {
@@ -54,7 +68,7 @@
         .task-coin-value {
             font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 1.5vh;
             color: #004d94;
         }
 
@@ -62,22 +76,22 @@
             display: block;
             font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 1.5vh;
             line-height: 1.4;
             text-align: center;
             color: #004d94;
         }
 
         .task-coin {
-            width: 10px;
-            height: 10px;
+            width: 1.4vh;
+            height: 1.4vh;
         }
 
         .task-desc {
-            width: 50%;
+            width: 70%;
             font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 1.5vh;
             line-height: 1.4;
             color: #004d94;
         }
@@ -85,7 +99,7 @@
         #friends-list {
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 1.5vh;
             line-height: 1.4;
             text-align: center;
             color: #004d94;
@@ -94,18 +108,18 @@
         #friends-users {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 1vh;
             width: 90%;
-            max-height: 250px;
+            max-height: 25vh;
             overflow-y: auto;
             overflow-x: hidden;
         }
 
         .friends-user {
             width: 100%;
-            border-radius: 19px;
-            padding: 5px 6px 7px 10px;
-            height: 40px;
+            border-radius: 1.9vh;
+            padding: .5vh .6vh .7vh 1vh;
+            height: 4.2vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -116,28 +130,28 @@
         .friends-info {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: .3vh;
         }
 
         .friends-name {
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 10px;
+            font-size: 1.1vh;
             color: #004d94;
         }
 
         .friends-coin {
             font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 500;
-            font-size: 10px;
+            font-size: 1.2vh;
             line-height: 1.2;
             color: #004d94;
             opacity: 0.6;
         }
 
         .friends-photo {
-            width: 27px;
-            height: 27px;
+            width: 3vh;
+            height: 3vh;
             border-radius: 100%;
             box-shadow: 0 3px 4px 0 rgba(0, 39, 75, 0.29);
         }
@@ -146,11 +160,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 2vh;
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 1.3vh;
             color: #004d94;
+            margin-bottom: 3.8vh;
         }
 
         #copy-link-button {
@@ -158,9 +173,9 @@
             align-items: center;
             justify-content: center;
             border-radius: 100px;
-            width: 144px;
-            height: 35px;
-            box-shadow: 5px 5px 13px 0 rgba(86, 194, 230, 0.9), -5px -5px 10px 0 rgba(106, 237, 255, 0.9), 5px -5px 10px 0 rgba(86, 194, 230, 0.2), -5px 5px 10px 0 rgba(86, 194, 230, 0.2), inset -1px -1px 2px 0 rgba(86, 194, 230, 0.5), inset 1px 1px 2px 0 rgba(106, 237, 255, 0.3);
+            width: 18vw;
+            height: 3.6vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #fff;
 
         }
@@ -170,12 +185,10 @@
             align-items: center;
             justify-content: center;
             border-radius: 100px;
-
-            width: 90px;
-            height: 35px;
-            box-shadow: 5px 5px 13px 0 rgba(0, 173, 111, 0.9), -5px -5px 10px 0 rgba(0, 255, 215, 0.9), 5px -5px 10px 0 rgba(0, 173, 111, 0.2), -5px 5px 10px 0 rgba(0, 173, 111, 0.2), inset -1px -1px 2px 0 rgba(0, 173, 111, 0.5), inset 1px 1px 2px 0 rgba(0, 255, 215, 0.3);
+            width: 18vw;
+            height: 3.6vh;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #00ffa3;
-
         }
     </style>
 </head>
