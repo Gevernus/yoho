@@ -18,6 +18,11 @@ export function init(entity) {
     const cancelButton = document.querySelector(".cancel-btn");
     cancelButton.addEventListener("click", closeModal);
 
+    const skinsButton = document.getElementById("skins-button");
+    skinsButton.addEventListener("click", () => {
+        inputComponent.addInput("setView", { view: "skins" });
+    });
+
     window.onclick = function (event) {
         if (event.target == document.getElementById('modal')) {
             closeModal();
