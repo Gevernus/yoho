@@ -1,0 +1,274 @@
+<head>
+    <style>
+      *,
+      *:before,
+      *:after {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+  
+      .container {
+        height: 100%;
+      }
+  
+      #skins-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 3vh;
+      }
+  
+      #skins-label {
+      margin-top: 4.8vh;
+      height: 6.7vh;
+      }
+
+      #skins-elements {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 1vh;
+        height: 60vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        justify-items: center;
+      }
+  
+      .skins-element {
+        display: flex;
+        flex-direction: column;      
+        width: 12.3vh;
+        height: 15vh;
+        margin: 1vh;
+        border-radius: 2vh;
+        box-shadow: inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3), .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2);
+        background-color: #ffffff18;
+      }
+  
+      .skins-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2vh;
+        width: 12.3vh;
+        height: 12.3vh;
+        box-shadow: inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3), .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2);
+        background: #fff;
+      }
+      
+      .skins-inner {
+        position: absolute;
+        top: 0.5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.5vh;
+      }
+
+      .skins-coint-value {        
+        font-family: "PF Agora Slab Pro", sans-serif;
+        font-weight: 500;
+        font-size: 1.3vh;
+        line-height: 1.2;
+        text-align: center;
+        color: #004d94;
+      }
+
+      .skins-mini-coint {
+        width: 1.5vh;
+        height: 1.5vh;
+      }
+
+      .scins-img {
+        width: 10vh;
+        height: 10vh;
+      }
+
+      .scins-img img {
+        width: 100%;
+      }
+
+      .skins-eiement-value {
+        margin-top: 0.5vh;
+        text-align: center;
+        font-family: "PF Agora Slab Pro", sans-serif;
+        font-weight: 500;
+        font-size: 1.3vh; 
+        line-height: 1.2;
+        color: #004d94;
+      }
+
+      #skins-elements::-webkit-scrollbar {
+        width: .8vh;
+        border-radius: 10vh;
+      }
+
+      #skins-elements::-webkit-scrollbar-thumb {
+          border-radius: 10vh;
+          background-color: #a1dfff;
+          box-shadow: 0 .4vh .4vh 0 rgba(0, 0, 0, 0.15);
+      }
+
+      #skins-elements::-webkit-scrollbar-track {
+        border-radius: 10vh;
+        box-shadow: inset 0 .4vh .4vh 0 rgba(0, 0, 0, 0.1);
+        background: #51c2ec;
+      }
+      
+    </style>
+  </head>
+  <img id="back-button" src="/images/back-button.svg" alt="back-button">
+  <div id="skins-content">
+    <img id="skins-label" src="/images/skins-label.svg" alt="skins-label">    
+    <div id="skins-elements">
+        <div class="skins-element">
+            <div class="skins-wrapper">
+              <div class="skins-inner">
+                <span class="skins-coint-value">1000</span>
+                <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+              </div>
+                <div class="scins-img">
+                    <img src="/images/shop-item-image.svg" alt="skin">
+                </div>
+            </div>
+            <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+          <div class="skins-wrapper">
+            <div class="skins-inner">
+              <span class="skins-coint-value">1000</span>
+              <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+            </div>
+              <div class="scins-img">
+                  <img src="/images/shop-item-image.svg" alt="skin">
+              </div>
+          </div>
+          <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+        <div class="skins-wrapper">
+          <div class="skins-inner">
+            <span class="skins-coint-value">1000</span>
+            <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+          </div>
+            <div class="scins-img">
+                <img src="/images/shop-item-image.svg" alt="skin">
+            </div>
+        </div>
+        <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+        <div class="skins-element">
+      <div class="skins-wrapper">
+        <div class="skins-inner">
+          <span class="skins-coint-value">1000</span>
+          <img class="skins-mini-coint" src="/images/mini-coin.svg" alt="mini-coin">
+        </div>
+          <div class="scins-img">
+              <img src="/images/shop-item-image.svg" alt="skin">
+          </div>
+      </div>
+      <span class="skins-eiement-value">x1.2 к приб.</span>
+        </div>
+    </div>
+  </div>
