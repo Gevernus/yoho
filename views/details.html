@@ -1,0 +1,256 @@
+<head>
+    <style>
+      *,
+      *:before,
+      *:after {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+  
+      .container {
+        height: 100%;
+      }
+  
+      #details-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 3vh;
+      }
+  
+      #details-label {
+      margin-top: 4.8vh;
+      height: 6.7vh;
+      }
+
+      #details-elements {
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+        margin-top: 1vh;
+        height: 60vh;
+        width: 95%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        justify-items: center;
+      }
+  
+      .details-element {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 2vh;
+        height: 6.4vh;
+        padding: .5vh 1vh .6vh .6vh;
+        margin: 0 1vh;
+        box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
+        background: #fff;
+      }
+      
+      .details-img {
+        border-radius: 1.1vh;
+        width: 5vh;
+        height: 5vh;
+        box-shadow: inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.37), 0 .2vh .8vh 0 rgba(86, 194, 230, 0.77);
+        background: #fff;
+      }
+
+      .details-img img{
+        width: 100%;
+      }
+      
+      .details-text {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .details-title {
+        font-family: "PixelSplitter", sans-serif;
+        font-size: 1.1vh;
+        color: #004d94;
+      }
+
+      .details-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5vh;
+      }
+
+      .details-inner {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 0.2vh;
+      }
+
+      .details-name {
+        font-family: "PixelSplitter", sans-serif;
+        font-size: .9vh;
+        line-height: 1.4;
+        color: #004d94;
+        opacity: 0.6;
+      }
+
+      .details-value {
+        font-family: "PixelSplitter", sans-serif;
+        font-size: .9vh;
+        color: #00d77c;
+      }
+
+      .details-button-buy {
+        border-radius: 10vh;
+        padding: .5vh;
+        width: 10vw;
+        height: 2vh;
+        box-shadow: .3vh .3vh .8vh 0 rgba(230, 210, 108, 0.9), -.3vh -.3vh .6vh 0 rgba(255, 255, 132, 0.9), .3vh -.3vh .6vh 0 rgba(230, 210, 108, 0.2), -.3vh .3vh .6vh 0 rgba(230, 210, 108, 0.2), inset -.1vh -.1vh .2vh 0 rgba(230, 210, 108, 0.5), inset .1vh .1vh .2vh 0 rgba(255, 255, 132, 0.3);
+        background: #ffe978;
+        font-family: "PixelSplitter", sans-serif;
+        font-size: .9vh;
+        color: #004d94; 
+        text-align: center;       
+      }
+
+      .details-button-Select {
+        border-radius: 10vh;
+        padding: .5vh;
+        width: 12vw;
+        height: 2vh;
+        box-shadow: .3vh .3vh .8vh 0 rgba(0, 230, 147, 0.47), -.3vh -.3vh .6vh 0 rgba(0, 255, 179, 0.48), .3vh -.3vh .6vh 0 rgba(0, 230, 147, 0.2), -.3vh .3vh .6vh 0 rgba(0, 230, 147, 0.2), inset -.1vh -.1vh .2vh 0 rgba(0, 230, 147, 0.34), inset .1vh .1vh .2vh 0 rgba(0, 255, 179, 0.5);
+        background: #00ffa3;
+        font-family: "PixelSplitter", sans-serif;
+        font-size: .9vh;
+        color: #004d94;
+        text-align: center; 
+      }
+
+      .details-button-selected {
+        border-radius: 10vh;
+        padding: .5vh;
+        width: 15vw;
+        height: 2vh;
+        box-shadow: .3vh .3vh .8vh 0 rgba(163, 223, 231, 0.9), -.3vh -.3vh .6vh 0 rgba(195, 255, 255, 0.9), .3vh -.3vh .6vh 0 rgba(163, 223, 231, 0.2), -.3vh .3vh .6vh 0 rgba(163, 223, 231, 0.2), inset -.1vh -.1vh .2vh 0 rgba(163, 223, 231, 0.5), inset .1vh .1vh .2vh 0 rgba(195, 255, 255, 0.3);
+        background: #fff;
+        font-family: "PixelSplitter", sans-serif;
+        font-size: .9vh;
+        color: #004d94;
+        text-align: center; 
+      }
+      
+    </style>
+  </head>
+  <img id="back-button" src="/images/back-button.svg" alt="back-button">
+  <div id="details-content">
+    <img id="details-label" src="/images/details-label.svg" alt="details-label">    
+    <div id="details-elements">
+        <div class="details-element">
+          <div class="details-img">
+            <img src="/images/shop-item-image.svg" alt="">
+          </div>        
+          <div class="details-text">
+            <span class="details-title">Cannon</span>
+            <div class="details-wrapper">
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Range</span>
+                <span class="details-value">200</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+            </div>
+          </div>  
+          <div class="details-button-buy">Buy</div>
+        </div>
+        <div class="details-element">
+          <div class="details-img">
+            <img src="/images/shop-item-image.svg" alt="">
+          </div>        
+          <div class="details-text">
+            <span class="details-title">Cannon</span>
+            <div class="details-wrapper">
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Range</span>
+                <span class="details-value">200</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+            </div>
+          </div>  
+          <div class="details-button-Select">Select</div>
+        </div>
+        <div class="details-element">
+          <div class="details-img">
+            <img src="/images/shop-item-image.svg" alt="">
+          </div>        
+          <div class="details-text">
+            <span class="details-title">Cannon</span>
+            <div class="details-wrapper">
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Range</span>
+                <span class="details-value">200</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+              <div class="details-inner">
+                <span class="details-name">Damage:</span>
+                <span class="details-value">100</span>
+              </div>
+            </div>
+          </div>  
+          <div class="details-button-selected">selected</div>
+        </div>
+    </div> 
+  </div>
