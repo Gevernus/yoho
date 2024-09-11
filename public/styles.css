@@ -1,3 +1,7 @@
+html,body{
+    font-size:100%;line-height:1;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+
 html {
     height: 100dvh;
     overflow: hidden
@@ -12,8 +16,8 @@ body {
 }
 
 #mini-coin {
-    width: 3.2vh;
-    height: 3.2vh;
+    width: 3.6vh;
+    height: 3.6vh;
 }
 
 #income {
@@ -22,7 +26,7 @@ body {
     gap: 1.3vw;
     justify-content: center;
     color: #004D94;
-    font-size: 1.4vh;
+    font-size: 1.7vh;
 }
 
 #back-button {
