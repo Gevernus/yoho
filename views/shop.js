@@ -20,7 +20,7 @@ export function init(entity) {
 
     const skinsButton = document.getElementById("skins-button");
     skinsButton.addEventListener("click", () => {
-        inputComponent.addInput("setView", { view: "skins" });
+        inputComponent.addInput("setView", { view: "details" });
     });
 
     window.onclick = function (event) {
