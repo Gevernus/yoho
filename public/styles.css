@@ -1,6 +1,7 @@
 html,body{
     font-size:100%;line-height:1;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active{outline: none; -webkit-tap-highlight-color: transparent;}
 
 html {
     height: 100dvh;
@@ -37,7 +38,7 @@ body {
 
 #back-button:active {
     transform: scale(0.95);
-    filter: brightness(0.8);
+    opacity: .8;
 }
 
 @font-face {
