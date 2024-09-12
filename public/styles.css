@@ -54,3 +54,9 @@ body {
     font-weight: 500;
     font-style: normal;
 }
+
+@media (max-height:700px) {
+    #page-content #middle-block {
+      width: 66.7%;
+    }
+  }
