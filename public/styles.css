@@ -1,5 +1,5 @@
 html,body{
-    font-size:100%;line-height:1;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+    font-size:100%;line-height:1;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing: antialiased;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
 :focus,:active{outline: none; -webkit-tap-highlight-color: transparent;}
 
@@ -44,7 +44,7 @@ body {
 @font-face {
     font-family: 'PixelSplitter';
     src: url('/fonts/PixelSplitter-Bold.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 700;
     font-style: normal;
 }
 
