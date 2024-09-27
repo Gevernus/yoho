@@ -5,37 +5,46 @@ services:
       - "3000:3000"
       - "8000:8000"
     environment:
-      - DB_HOST=79.174.88.214
-      - DB_PORT=16685
+      - DB_HOST=79.174.88.19
+      - DB_PORT=19582
       - DB_DATABASE=db1
-      - DB_USERNAME=user1
-      - DB_PASSWORD=beQzojU$#1re0FZ2o70ijJ5w
+      - DB_USERNAME=admin
+      - DB_PASSWORD=Grove312666
     networks:
       - skipper-network
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`yoho-webapp.com`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls=true"
+      - "traefik.http.routers.app.tls.certresolver=myresolver"
+      - "traefik.http.services.app.loadbalancer.server.port=3000" # Adjust if your app listens on a different port
+
+  traefik:
+    image: traefik:v2.9
+    command:
+      - "--api.insecure=true" # Remove or secure in production
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=gevernus@mail.ru"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
       - "443:443"
-    networks:
-      - skipper-network
-    depends_on:
-      - app
-
-  certbot:
-    image: certbot/certbot
+      - "8080:8080" # Traefik dashboard
     volumes:
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik/letsencrypt:/letsencrypt"
     networks:
       - skipper-network
+    restart: always
 
-volumes:
-  pgdata:
 networks:
   skipper-network:
     driver: bridge
+
+volumes:
+  pgdata:
+  traefik:
