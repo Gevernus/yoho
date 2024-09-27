@@ -31,7 +31,6 @@ async function initApp() {
         state.timer += elapsedSeconds;
     }
 
-    console.log(state.timer);
     systemManager.addSystem(telegramSystem);
     systemManager.addSystem(storageSystem)
     const coinsComponent = new CoinsComponent(state.coins)
@@ -122,10 +121,25 @@ function tick(currentTime) {
 }
 
 function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        loadingScreen.style.display = 'none';
-    }
+    const images = Array.from(document.querySelectorAll("img"));
+
+    Promise.all(
+        images
+            .filter(img => !img.complete) // Only filter out images that are not complete
+            .map(img => new Promise(resolve => {
+                img.onload = () => {
+                    console.log(`Image loaded: ${img.src}`);
+                    resolve(); // Resolve the promise when image is successfully loaded
+                };
+                img.onerror = () => {
+                    console.log(`Failed to load image: ${img.src}`);
+                    resolve(); // Resolve even on error, so the page can still continue
+                };
+            }))
+    ).then(() => {
+        console.log("All images have finished loading.");
+        document.getElementById('loading-screen').style.display = 'none';
+    });
 }
 
 window.addEventListener('load', initApp);
