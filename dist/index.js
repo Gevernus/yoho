@@ -125,6 +125,8 @@ function hideLoadingScreen() {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
         loadingScreen.style.display = 'none';
+        // Show the actual content
+        document.getElementById('main').style.display = 'flex';
     }
 }
 
