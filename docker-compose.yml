@@ -7,9 +7,9 @@ services:
     environment:
       - DB_HOST=79.174.88.19
       - DB_PORT=19582
-      - DB_DATABASE=db1
+      - DB_DATABASE=yoho
       - DB_USERNAME=admin
-      - DB_PASSWORD=Grove312666
+      - DB_PASSWORD=Grove312666$
     networks:
       - skipper-network
     labels:
