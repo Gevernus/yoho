@@ -10,7 +10,7 @@
       height: 100%;
       width: 100%;
       font-family: "PixelSplitter", sans-serif;
-      font-size: 1.5vh;
+      font-size: 1.7vh;
       color: #004d94;
       text-align: center;
     }
@@ -31,8 +31,7 @@
     }
 
     .task-daily-title {
-
-      margin-bottom: .5vh;
+      margin-bottom: 1.5vh;
       margin-top: 1vh;
     }
 
@@ -89,19 +88,16 @@
     }
 
     .task-invite-title {
-      font-size: 1.4vh;
-      text-align: center;
-      color: #004d94;
-      margin-bottom: .5vh;
       margin-top: 2vh;
+      margin-bottom: 1.7vh;
     }
 
     .task-rewards {
-      width: 98%;
+      width: 100%;
       height: 9.5vh;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
 
     .task-rewards-item {
@@ -112,8 +108,8 @@
     }
 
     .task-rewards-content {
-      width: 9vh;
-      height: 9vh;
+      width: 23.2vw;
+      height: 12vh;
       background: url(images/reward-task.svg) 50% 50% / cover no-repeat;
       display: flex;
       flex-direction: column;
@@ -155,9 +151,6 @@
     }
 
     .task-league-title {
-      font-size: 1.4vh;
-      text-align: center;
-      color: #004d94;
       margin-top: 1vh;
       margin-bottom: 1.5vh;
     }
@@ -178,6 +171,7 @@
       height: 9vh;
       background: url(images/reward-league.svg) 40% 60% / 130% no-repeat;
     }
+
     .task-league-item img {
       height: 60%;
     }
@@ -186,12 +180,14 @@
       display: flex;
       flex-direction: column;
       gap: 1vh;
-      width: 90%;
+      width: 100%;
       margin-bottom: 3.8vh;
+      padding-left: 30px;
+      padding-right: 30px;
     }
 
     .task-user {
-      width: 95%;
+      width: 100%;
       border-radius: 1.9vh;
       padding: .5vh .6vh .7vh 1vh;
       height: 4vh;
@@ -243,8 +239,15 @@
       margin-top: 1vh;
       margin-bottom: 1.5vh;
     }
-    .task-pool img{
+
+    .task-pool img {
       width: 100%;
+    }
+
+    .reward-block {
+      width: 100%;
+      padding-left: 30px;
+      padding-right: 30px;
     }
   </style>
 </head>
@@ -253,7 +256,7 @@
   <div id="task-upper">
     <img id="task-title" src="/images/task-title.svg" alt="task">
   </div>
-  <div>
+  <div class="reward-block">
     <div class="task-daily-title">Daily reward</div>
     <div id="task-claims">
       <div class="task-claims-item">
@@ -288,7 +291,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="reward-block">
     <div class="task-invite-title">Invite reward</div>
     <div class="task-rewards">
       <div class="task-rewards-item">
@@ -310,7 +313,7 @@
           <span id="task-more-value10">1</span>
           <span> more</span>
         </button> -->
-      </div>
+      </div class="reward-block">
       <div class="task-rewards-item">
         <div class="task-rewards-content">
           <div class="task-rewards-value">20</div>
@@ -335,7 +338,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="reward-block">
     <div class="task-league-title">League reward</div>
     <div class="task-league-list">
       <div class="task-league-item">
