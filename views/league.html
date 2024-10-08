@@ -6,7 +6,6 @@
 
         #league-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             flex-direction: column;
             width: 100%;
@@ -18,7 +17,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 4.8vh;
+            margin-top: 5vh;
         }
 
         #league-title {
@@ -31,6 +30,7 @@
             font-size: 2vh;
             color: #fff;
             text-shadow: 0 .4vh .4vh 0 rgba(106, 121, 197, 0.25);
+            margin-top: 5vh;
         }
 
         .league-wrapper {
@@ -43,7 +43,8 @@
         }
 
         .league-img-cup img {
-            height: 25vh;
+            height: 33vh;
+            margin-top: 7vh;
         }
 
         .league-img-cup {
@@ -59,14 +60,14 @@
             left: 0;
             border: none;
             border-radius: 1.5vh;
-            width: 4vh;
-            height: 4vh;
+            width: 12vw;
+            height: 5vh;
             box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #fff;
         }
 
         #league-button-back img {
-            width: 60%;
+            width: 5vw;
         }
 
         #league-button-next {
@@ -75,20 +76,20 @@
             right: 0;
             border: none;
             border-radius: 1.5vh;
-            width: 4vh;
-            height: 4vh;
+            width: 12vw;
+            height: 5vh;
             box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #fff;
         }
 
         #league-button-next img {
-            width: 60%;
+            width: 5vw;
         }
 
         .league-value {
             border-radius: 3vh;
-            padding: .8vh .9vh;
-            width: 36vw;
+            padding: 0.8vh 2.6vw;
+            width: 50vw;
             height: 5vh;
             box-shadow: -.1vh -.1vh .2vh 0 rgba(122, 162, 209, 0.5), .1vh .1vh .2vh 0 rgba(168, 224, 255, 0.3), inset .5vh .5vh 1.3vh 0 rgba(122, 162, 209, 0.9), inset -.5vh -.5vh 1vh 0 rgba(168, 224, 255, 0.9), inset .5vh -.5vh 1vh 0 rgba(122, 162, 209, 0.2), inset -.5vh .5vh 1vh 0 rgba(122, 162, 209, 0.2);
             background: #91c1f9;
@@ -96,12 +97,14 @@
             font-weight: 700;
             font-size: 1.6vh;
             color: #004d94;
+            position: relative;
+            bottom: 3vh;
         }
 
         .league-value-inner {
             border-radius: 2vh;
-            padding: .7vh 4.3vh;
-            width: 32vw;
+            padding: .7vh 4.3vw;
+            width: 45vw;
             height: 3.3vh;
             box-shadow: .1vh .1vh .3vh 0 rgba(124, 186, 243, 0.9), -.1vh -.1vh .2vh 0 rgba(255, 255, 255, 0.9), .1vh -.1vh .2vh 0 rgba(194, 205, 243, 0.2), -.1vh .1vh .2vh 0 rgba(187, 189, 246, 0.2), inset -.1vh -.1vh .2vh 0 rgba(129, 170, 207, 0.5), inset .1vh .1vh .2vh 0 rgba(255, 255, 255, 0.3);
             background: #fff;
@@ -120,6 +123,7 @@
             align-items: center;
             justify-content: center;
             gap: 1vh;
+            scale: 1.2;
         }
 
         .league-bonus-item {
@@ -153,26 +157,34 @@
         }
 
         .league-claim {
-            margin-bottom: 3.8vh;
             border-radius: 100px;
-            padding: 1vh;
-            width: 28vw;
-            height: 3.6vh;
+            padding: 2vh;
+            width: 37vw;
+            height: 5.6vh;
             box-shadow: .5vh .5vh 1.3vh 0 rgba(0, 173, 111, 0.9), -.5vh -.5vh 1vh 0 rgba(0, 255, 215, 0.9), .5vh -.5vh 1vh 0 rgba(0, 173, 111, 0.2), -.5vh .5vh 1vh 0 rgba(0, 173, 111, 0.2), inset -.1vh -.1vh .2vh 0 rgba(0, 173, 111, 0.5), inset .1vh .1vh .2vh 0 rgba(0, 255, 215, 0.3);
             background: #00ffa3;
             font-family: "PixelSplitter", sans-serif;
             font-weight: 700;
             font-size: 1.5vh;
+            margin-top: 3vh;
             color: #004d94;
             text-align: center;
+        }
+
+        .eclipse {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 
     <link href="swiper-bundle.min.css" rel="stylesheet">
 </head>
 
-
+<img id="back-button" src="/images/back-button.svg" alt="back-button">
 <div id="league-content">
+    <img class="eclipse" src="images/eclipse.svg" alt="">
     <div id="league-upper">
         <img id="league-title" src="/images/league-title.svg" alt="league">
     </div>

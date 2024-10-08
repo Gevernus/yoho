@@ -31,7 +31,7 @@ body {
 }
 
 #back-button {
-    width: 7vh;
+    width: calc(7vh + 3vw);
     position: absolute;
     top: 4.5vh;
 }
@@ -55,8 +55,8 @@ body {
     font-style: normal;
 }
 
-@media (max-height:700px) {
+/* @media (max-height:700px) {
     #page-content #middle-block {
       width: 66.7%;
     }
-  }
+  } */

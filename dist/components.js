@@ -50,6 +50,12 @@ export class ReferralsComponent {
     }
 }
 
+export class LeagueComponent {
+    constructor(league) {
+        this.league = league;
+    }
+}
+
 export class InputComponent {
     constructor() {
         this.inputQueue = [];
