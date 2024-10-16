@@ -54,10 +54,20 @@ export function init(entity) {
             }
         });
 
-        // Optional: To restrict input to digits only, you can also use the `keydown` event
         element.addEventListener('keydown', (e) => {
+            const inputValue = e.target.value;
+
             if (e.key !== 'Backspace' && e.key !== 'Delete' && isNaN(e.key)) {
-                e.preventDefault();
+                e.preventDefault(); // Restrict to digits only
+            }
+
+            // Handle Backspace to focus on previous element if input is empty
+            if (e.key === 'Backspace' && inputValue.length === 0) {
+                e.preventDefault(); // Prevent default backspace behavior
+                const previousElement = comboElements[index - 1];
+                if (previousElement) {
+                    previousElement.focus();
+                }
             }
         });
     });
