@@ -30,6 +30,38 @@ export function init(entity) {
     }
     setupTabs(items.items);
     populateShop(items.items.filter(item => item.type === "ship"));
+
+    const comboElements = document.querySelectorAll('.combo-element');
+
+    comboElements.forEach((element, index) => {
+        element.addEventListener('input', (e) => {
+            const inputValue = e.target.value;
+
+            // Check if input is not a digit
+            if (isNaN(inputValue)) {
+                e.target.value = ''; // Clear non-digit input
+                return;
+            }
+
+            // If input length exceeds 1 character, focus on the next element
+            if (inputValue.length > 1) {
+                e.target.value = inputValue[0]; // Keep only the first character
+            }
+
+            // Automatically focus on the next input field if a single digit is entered
+            if (inputValue.length === 1 && index < comboElements.length - 1) {
+                comboElements[index + 1].focus();
+            }
+        });
+
+        // Optional: To restrict input to digits only, you can also use the `keydown` event
+        element.addEventListener('keydown', (e) => {
+            if (e.key !== 'Backspace' && e.key !== 'Delete' && isNaN(e.key)) {
+                e.preventDefault();
+            }
+        });
+    });
+
 };
 
 function setupTabs(shopItems) {
