@@ -52,6 +52,8 @@ router.post('/state', async (req, res) => {
         if (state) {
             state.coins = stateData.coins;
             state.timer = stateData.timer;
+            state.shkiper_counter = stateData.shkiper_counter;
+            state.shkiper_timer = stateData.shkiper_timer;
             state.save();
         }
         return res.status(200).json({ message: "State data saved successfully" });

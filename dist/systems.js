@@ -1,5 +1,5 @@
 import { System } from './ecs.js';
-import { CoinsComponent, ViewComponent, InputComponent, PassiveIncomeComponent, TimerComponent } from './components.js';
+import { CoinsComponent, ViewComponent, InputComponent, PassiveIncomeComponent, TimerComponent, ShkiperComponent } from './components.js';
 
 export class TimerSystem extends System {
     async init() {
@@ -10,6 +10,19 @@ export class TimerSystem extends System {
             const timerComponent = this.entity.getComponent(TimerComponent);
             timerComponent.timer += deltaTime;
             timerComponent.timer = Math.min(3600, timerComponent.timer);
+        }
+
+        if (this.entity.hasComponent(ShkiperComponent)) {
+            const shkiperComponent = this.entity.getComponent(ShkiperComponent);
+            if (shkiperComponent.counter >= 2) {
+                shkiperComponent.timer += deltaTime;
+                shkiperComponent.timer = Math.min(3600 * 12, shkiperComponent.timer);
+                if (shkiperComponent.timer >= 3600) {
+                    shkiperComponent.timer = 0;
+                    shkiperComponent.counter = 0;
+                }
+            }
+
         }
     }
 }
@@ -167,6 +180,7 @@ export class StorageSystem extends System {
         }
 
         const coinsComponent = this.entity.getComponent(CoinsComponent);
+        const shkiperComponent = this.entity.getComponent(ShkiperComponent);
         const passiveIncomeComponent = this.entity.getComponent(PassiveIncomeComponent);
         const timerComponent = this.entity.getComponent(TimerComponent);
 
@@ -179,6 +193,8 @@ export class StorageSystem extends System {
         this.state.coins = Math.floor(coinsComponent.amount);
         this.state.timer = Math.floor(timerComponent.timer);
         this.state.passive_income = passiveIncomeComponent.incomePerHour;
+        this.state.shkiper_counter = shkiperComponent.counter;
+        this.state.shkiper_timer = shkiperComponent.timer;
         try {
             const response = await fetch('api/state', {
                 method: 'POST',

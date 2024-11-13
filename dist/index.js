@@ -1,7 +1,7 @@
 import { StorageSystem, TelegramSystem, UISystem, TimerSystem, ActionsSystem } from './systems.js';
 import { SystemManager } from './systemManager.js';
 import { Entity } from './ecs.js';
-import { CoinsComponent, TimerComponent, PassiveIncomeComponent, InputComponent, UserComponent, ItemsComponent, ReferralsComponent, LeagueComponent } from './components.js';
+import { CoinsComponent, TimerComponent, PassiveIncomeComponent, InputComponent, UserComponent, ItemsComponent, ReferralsComponent, LeagueComponent, ShkiperComponent } from './components.js';
 
 let lastTime = 0;
 const targetFPS = 60;
@@ -50,6 +50,7 @@ async function initApp() {
     gameEntity.addComponent(new ItemsComponent(items));
     gameEntity.addComponent(new ReferralsComponent(referrals));
     gameEntity.addComponent(new LeagueComponent(state.league));
+    gameEntity.addComponent(new ShkiperComponent(state.shkiper_counter, state.shkiper_timer));
 
     storageSystem.setEntity(gameEntity);
 

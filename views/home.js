@@ -7,9 +7,16 @@ export function init(entity) {
     const inputComponent = entity.getComponent('InputComponent');
     const leagueComponent = entity.getComponent('LeagueComponent');
     const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
+    const shkiperComponent = entity.getComponent('ShkiperComponent');
 
     claimButton.addEventListener("click", () => {
-        coinsComponent.amount += passiveIncomeComponent.incomePerHour;
+        if (shkiperComponent.counter >= 0 && shkiperComponent.counter < 2) {
+            shkiperComponent.counter++;
+            coinsComponent.amount += passiveIncomeComponent.incomePerHour * 12;
+        } else {
+            coinsComponent.amount += passiveIncomeComponent.incomePerHour;
+        }
+
         timerComponent.timer = 0;
     });
 
@@ -24,34 +31,32 @@ export function init(entity) {
     });
 };
 
-function renderClaimComponent(entity) {
-    const claimContainer = document.getElementById("claim-container");
-    const incomeContainer = document.getElementById("income");
-    const timerContainer = document.querySelector(".timer-container");
-    if (timerComponent.timer >= 3600) {
-        claimContainer.style.display = 'flex';
-        timerContainer.style.display = 'none';
-        incomeContainer.style.display = 'none';
-        const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
-        // const claimValue = document.getElementById("claim-value-coins");
-        // claimValue.textContent = passiveIncomeComponent.incomePerHour;
+// function renderClaimComponent(entity) {
+//     const claimContainer = document.getElementById("claim-container");
+//     const incomeContainer = document.getElementById("income");
+//     const timerContainer = document.querySelector(".timer-container");
+//     if (timerComponent.timer >= 3600) {
+//         claimContainer.style.display = 'flex';
+//         timerContainer.style.display = 'none';
+//         incomeContainer.style.display = 'none';
+//         const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
+//         // const claimValue = document.getElementById("claim-value-coins");
+//         // claimValue.textContent = passiveIncomeComponent.incomePerHour;
 
-    } else {
-        claimContainer.style.display = 'none';
-        timerContainer.style.display = 'flex';
-        incomeContainer.style.display = 'flex';
-    }
-}
+//     } else {
+//         claimContainer.style.display = 'none';
+//         timerContainer.style.display = 'flex';
+//         incomeContainer.style.display = 'flex';
+//     }
+// }
 
 export function render(entity) {
     const timerFill = document.querySelector('.timer-fill');
     const timerNumber = document.querySelector('.timer-number');
     const timerUnit = document.querySelector('.timer-unit');
 
-    const systemTime = document.getElementById("time");
     const coins = document.getElementById("coin-value");
     const income = document.getElementById("income-text");
-
 
     const coinsComponent = entity.getComponent('CoinsComponent');
     coins.textContent = coinsComponent.amount;
@@ -60,7 +65,8 @@ export function render(entity) {
     income.textContent = `${passiveIncomeComponent.incomePerHour}/h`;
 
     const timerComponent = entity.getComponent('TimerComponent');
-    const startTime = 60 * 60; // 60 minutes in seconds
+    const shkiperComponent = entity.getComponent('ShkiperComponent');
+    const startTime = shkiperComponent.counter >= 0 && shkiperComponent.counter < 2 ? 60 * 60 * 12 : 60 * 60;
 
     const remainingTime = startTime - timerComponent.timer;
 
@@ -73,29 +79,36 @@ export function render(entity) {
     } else {
         timerUnit.style.display = 'block';
     }
-    const widthPercentage = (timerComponent.timer / 3600) * 90;
+
+    if (remainingTime > 60 * 60) {
+        timerNumber.textContent = (remainingTime / 3600).toFixed(0);
+        timerUnit.textContent = 'h'
+    } else {
+        timerUnit.textContent = 'min'
+    }
+
+    const widthPercentage = (timerComponent.timer / startTime) * 90;
 
     // Set the width of the timer fill
     timerFill.style.width = `${widthPercentage}%`;
 
     const claimContainer = document.getElementById("claim-container");
-    const incomeContainer = document.getElementById("income");
-    const timerContainer = document.querySelector(".timer-container");
     const buySkipper = document.getElementById("buy-skipper");
 
-    if (timerComponent.timer >= 3600) {
+    if (timerComponent.timer >= startTime) {
         claimContainer.style.display = 'flex';
-        // timerContainer.style.display = 'none';
         buySkipper.style.display = 'none';
-        // incomeContainer.style.display = 'none';
-        // const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
-        // const claimValue = document.getElementById("claim-value-coins");
-        // claimValue.textContent = passiveIncomeComponent.incomePerHour;
-
     } else {
         claimContainer.style.display = 'none';
-        // timerContainer.style.display = 'flex';
-        // incomeContainer.style.display = 'flex';
-        buySkipper.style.display = 'flex';
+        buySkipper.style.display = 'inline';
+    }
+
+    if (shkiperComponent.counter >= 2) {
+        
+        buySkipper.textContent = `shkiper on rest ${timerNumber.textContent} ${timerUnit.textContent}`
+    } else if (shkiperComponent.counter >= 0) {
+        buySkipper.textContent = 'shkiper on work'
+    } else {
+        buySkipper.textContent = 'buy shkiper'
     }
 };

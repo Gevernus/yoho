@@ -25,6 +25,13 @@ export class TimerComponent {
     }
 }
 
+export class ShkiperComponent {
+    constructor(counter, timer) {
+        this.counter = counter;
+        this.timer = timer;
+    }
+}
+
 export class ShopComponent {
     constructor(shopData = []) {
         this.shopData = shopData;

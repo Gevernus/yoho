@@ -11,6 +11,12 @@ export class State extends BaseEntity {
     @Column({ default: 0 })
     coins!: number
 
+    @Column({ default: -1 })
+    shkiper_counter!: number
+
+    @Column({ default: 0 })
+    shkiper_timer!: number
+
     @Column({ default: 'BRONZE' })
     league!: string
 
