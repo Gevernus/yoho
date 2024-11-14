@@ -18,6 +18,9 @@ export class User extends BaseEntity {
     @Column({ nullable: true })
     language_code!: string;
 
+    @Column({ default: false })
+    is_premium!: boolean;
+
     @OneToMany(() => Referral, referral => referral.inviter)
     referrals!: Referral[]
 }

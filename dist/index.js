@@ -34,15 +34,15 @@ async function initApp() {
     systemManager.addSystem(telegramSystem);
     systemManager.addSystem(storageSystem)
     const coinsComponent = new CoinsComponent(state.coins)
-    if (referrals && referrals.length > 0) {
-        referrals.forEach(referral => {
-            if (referral.status != 'claimed') {
-                coinsComponent.amount += referral.bonus;
-                referral.status = 'claimed';
-                claim(user.id, referral.id);
-            }
-        });
-    }
+    // if (referrals && referrals.length > 0) {
+    //     referrals.forEach(referral => {
+    //         if (referral.status != 'claimed') {
+    //             coinsComponent.amount += referral.bonus;
+    //             referral.status = 'claimed';
+    //             claim(user.id, referral.id);
+    //         }
+    //     });
+    // }
     gameEntity.addComponent(coinsComponent);
     gameEntity.addComponent(new PassiveIncomeComponent(items));
     gameEntity.addComponent(new UserComponent(user));
@@ -90,23 +90,6 @@ async function initApp() {
         tick(currentTime);
     });
     console.log('Frame requested')
-}
-
-async function claim(userId, referralId) {
-    try {
-        const response = await fetch(`api/${userId}/claim`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            json: { referralId: referralId },
-        });
-        if (!response.ok) {
-            throw new Error('Failed to save state');
-        }
-    } catch (error) {
-        console.error('Error saving state:', error);
-    }
 }
 
 function tick(currentTime) {

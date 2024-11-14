@@ -13,6 +13,23 @@ export function init(entity) {
     populateFriends(referralsComponent.items);
 };
 
+async function claim(userId, referralId) {
+    try {
+        const response = await fetch(`api/${userId}/claim`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            json: { referralId: referralId },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to save state');
+        }
+    } catch (error) {
+        console.error('Error saving state:', error);
+    }
+}
+
 function generateInviteLink(userId, appURL) {
     const params = `${userId}`;
     return `${appURL}?startapp=${encodeURIComponent(params)}`;

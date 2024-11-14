@@ -27,7 +27,7 @@ router.post('/user', async (req, res) => {
                 referral.inviterId = inviterId;
                 referral.userId = user.id;
                 referral.username = user.username;
-                referral.bonus = 5000;
+                referral.bonus = user.is_premium ? 25000 : 5000;
                 state.coins = 5000;
                 referral.status = 'accepted';
                 await referral.save();
@@ -133,7 +133,16 @@ router.get('/:userId/referrals', async (req, res) => {
         const referrals = await Referral.find({
             where: { inviterId: userId }
         });
-        res.json(referrals);
+        const updatedReferrals = await Promise.all(referrals.map(async (referral) => {
+            const state = await State.findOne({ where: { id: String(referral.id) } });
+            return {
+                ...referral,
+                coins: state ? state.coins : 0
+            };
+        }));
+
+        // Send the updated referrals as the response
+        res.json(updatedReferrals);
     } catch (error) {
         console.error('Error fetching referrals:', error);
         res.status(500).send('Error fetching referrals');
