@@ -157,10 +157,11 @@ router.post('/:userId/claim', async (req, res) => {
         if (!referral) {
             throw new Error('Referral not found');
         }
+        const bonusToClaim = referral.bonus;
         referral.bonus = 0;
         referral.status = 'claimed';
         await referral.save();
-        res.send('Bonus claimed successfully');
+        res.json(bonusToClaim);
     } catch (error) {
         console.error('Error claiming bonus:', error);
         res.status(500).send(`Error claiming bonus: ${error}`);

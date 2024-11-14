@@ -25,6 +25,7 @@ async function claim(userId, referralId) {
         if (!response.ok) {
             throw new Error('Failed to save state');
         }
+        return await response.json();
     } catch (error) {
         console.error('Error saving state:', error);
     }
@@ -39,7 +40,7 @@ function shareInviteLink(entity) {
     const userComponent = entity.getComponent('UserComponent');
     const inputComponent = entity.getComponent('InputComponent');
     const userId = userComponent.user.id;
-    let inviteLink = generateInviteLink(userId, 'https://t.me/yoho_nw_bot/YOHO');
+    let inviteLink = generateInviteLink(userId, 'https://t.me/yoho_nw_bot/YOHO312');
     inputComponent.addInput("openLink", {
         url: inviteLink
     });
@@ -76,7 +77,7 @@ function populateFriends(friends) {
         // Create the coin span
         const coinSpan = document.createElement('span');
         // coinSpan.textContent = `${friend.coins.toLocaleString()}/${friend.totalCoins.toLocaleString()}`;
-        coinSpan.textContent = `${"0"}/${"100000"}`;
+        coinSpan.textContent = `${friend.coins}/${"5100"}`;
 
         // Append the image and span to the coinDiv
         coinDiv.appendChild(coinImg);
