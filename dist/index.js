@@ -32,18 +32,8 @@ async function initApp() {
     }
 
     systemManager.addSystem(telegramSystem);
-    systemManager.addSystem(storageSystem)
-    const coinsComponent = new CoinsComponent(state.coins)
-    // if (referrals && referrals.length > 0) {
-    //     referrals.forEach(referral => {
-    //         if (referral.status != 'claimed') {
-    //             coinsComponent.amount += referral.bonus;
-    //             referral.status = 'claimed';
-    //             claim(user.id, referral.id);
-    //         }
-    //     });
-    // }
-    gameEntity.addComponent(coinsComponent);
+    systemManager.addSystem(storageSystem);
+    gameEntity.addComponent(new CoinsComponent(state.coins, state.all_coins));
     gameEntity.addComponent(new PassiveIncomeComponent(items));
     gameEntity.addComponent(new UserComponent(user));
     gameEntity.addComponent(new TimerComponent(state.timer));

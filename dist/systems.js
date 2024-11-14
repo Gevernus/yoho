@@ -191,6 +191,7 @@ export class StorageSystem extends System {
 
 
         this.state.coins = Math.floor(coinsComponent.amount);
+        this.state.all_coins = Math.floor(coinsComponent.all_amount);
         this.state.timer = Math.floor(timerComponent.timer);
         this.state.passive_income = passiveIncomeComponent.incomePerHour;
         this.state.shkiper_counter = shkiperComponent.counter;

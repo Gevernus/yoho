@@ -18,6 +18,7 @@ export function init(entity) {
     buyButton.addEventListener("click", () => {
         shkiperComponent.counter = 0;
         coinsComponent.amount += 2500;
+        coinsComponent.all_amount += 2500;
     });
     renderPage(entity);
 };

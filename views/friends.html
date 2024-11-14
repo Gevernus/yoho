@@ -101,7 +101,7 @@
             text-align: center;
             color: #004d94;
             margin-top: 2.5vh;
-            height: calc(32vh - 5vw);
+            margin-bottom: 1.5vh;
         }
 
         #friends-users {
@@ -109,7 +109,7 @@
             flex-direction: column;
             gap: 1vh;
             width: 90%;
-            max-height: 20vh;
+            height: 25vh;
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -117,8 +117,8 @@
         .friends-user {
             width: 100%;
             border-radius: 1.9vh;
-            padding: .5vh .6vh .7vh 1vh;
-            height: 4.2vh;
+            padding: 10px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -140,6 +140,8 @@
         }
 
         .friends-coin {
+            display: flex;
+            gap: 5px;
             font-family: "PF Agora Slab Pro", sans-serif;
             font-weight: 500;
             font-size: 1.2vh;
@@ -188,6 +190,28 @@
             height: 6.5vh;
             box-shadow: .5vh .5vh 1.3vh 0 rgba(86, 194, 230, 0.9), -.5vh -.5vh 1vh 0 rgba(106, 237, 255, 0.9), .5vh -.5vh 1vh 0 rgba(86, 194, 230, 0.2), -.5vh .5vh 1vh 0 rgba(86, 194, 230, 0.2), inset -.1vh -.1vh .2vh 0 rgba(86, 194, 230, 0.5), inset .1vh .1vh .2vh 0 rgba(106, 237, 255, 0.3);
             background: #00ffa3;
+        }
+
+        .claim-button {
+            width: 75px;
+            height: 25px;
+            border-radius: 10vh;
+            border: none;
+            box-shadow: .5vh .5vh 1.3vh 0 rgba(0, 173, 111, 0.9), -.5vh -.5vh 1vh 0 rgba(0, 255, 215, 0.9), .5vh -.5vh 1vh 0 rgba(0, 173, 111, 0.2), -.5vh .5vh 1vh 0 rgba(0, 173, 111, 0.2), inset -.1vh -.1px .2vh 0 rgba(0, 173, 111, 0.5), inset .1vh .1vh .2vh 0 rgba(0, 255, 215, 0.3);
+            background: #00ffa3;
+            font-family: "PixelSplitter", sans-serif;
+            font-size: 10px;
+            color: #004d94;
+        }
+
+        .claim-button:active {
+            box-shadow: inset .5vh .5vh 1.3vh 0 rgba(0, 173, 111, 0.9), inset -.5vh -.5vh 1vh 0 rgba(0, 255, 215, 0.9), inset .5vh -.5vh 1vh 0 rgba(0, 173, 111, 0.2), inset -.5vh .5vh 1vh 0 rgba(0, 173, 111, 0.2), -.1vh -.1vh .2vh 0 rgba(0, 173, 111, 0.5), .1vh .1vh .2vh 0 rgba(0, 255, 215, 0.3);
+            background: #00cc83;
+        }
+
+        .friends-photo-button-container {
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>

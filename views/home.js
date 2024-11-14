@@ -13,8 +13,10 @@ export function init(entity) {
         if (shkiperComponent.counter >= 0 && shkiperComponent.counter < 2) {
             shkiperComponent.counter++;
             coinsComponent.amount += passiveIncomeComponent.incomePerHour * 12;
+            coinsComponent.all_amount += passiveIncomeComponent.incomePerHour * 12;
         } else {
             coinsComponent.amount += passiveIncomeComponent.incomePerHour;
+            coinsComponent.all_amount += passiveIncomeComponent.incomePerHour;
         }
 
         timerComponent.timer = 0;
@@ -104,7 +106,7 @@ export function render(entity) {
     }
 
     if (shkiperComponent.counter >= 2) {
-        
+
         buySkipper.textContent = `shkiper on rest ${timerNumber.textContent} ${timerUnit.textContent}`
     } else if (shkiperComponent.counter >= 0) {
         buySkipper.textContent = 'shkiper on work'

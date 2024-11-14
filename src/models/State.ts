@@ -11,6 +11,9 @@ export class State extends BaseEntity {
     @Column({ default: 0 })
     coins!: number
 
+    @Column({ default: 0 })
+    all_coins!: number
+
     @Column({ default: -1 })
     shkiper_counter!: number
 

@@ -29,6 +29,7 @@ router.post('/user', async (req, res) => {
                 referral.username = user.username;
                 referral.bonus = user.is_premium ? 25000 : 5000;
                 state.coins = 5000;
+                state.all_coins = 5000;
                 referral.status = 'accepted';
                 await referral.save();
             }
@@ -51,6 +52,7 @@ router.post('/state', async (req, res) => {
         const state = await State.findOne({ where: { id: stateData.id } })
         if (state) {
             state.coins = stateData.coins;
+            state.all_coins = stateData.all_coins;
             state.timer = stateData.timer;
             state.shkiper_counter = stateData.shkiper_counter;
             state.shkiper_timer = stateData.shkiper_timer;
@@ -134,10 +136,11 @@ router.get('/:userId/referrals', async (req, res) => {
             where: { inviterId: userId }
         });
         const updatedReferrals = await Promise.all(referrals.map(async (referral) => {
-            const state = await State.findOne({ where: { id: referral.inviterId } });
+            const state = await State.findOne({ where: { id: referral.userId } });
             return {
                 ...referral,
-                coins: state ? state.coins : 0
+                coins: state ? state.coins : 0,
+                all_coins: state ? state.all_coins : 0
             };
         }));
 

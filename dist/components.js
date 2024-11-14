@@ -1,6 +1,7 @@
 export class CoinsComponent {
-    constructor(amount = 0) {
+    constructor(amount = 0, all_amount = 0) {
         this.amount = amount;
+        this.all_amount = all_amount;
     }
 }
 

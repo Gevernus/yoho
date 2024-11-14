@@ -10,7 +10,7 @@ export function init(entity) {
         shareInviteLink(entity);
     });
     const referralsComponent = entity.getComponent('ReferralsComponent');
-    populateFriends(referralsComponent.items);
+    populateFriends(referralsComponent.items, entity);
 };
 
 async function claim(userId, referralId) {
@@ -46,7 +46,7 @@ function shareInviteLink(entity) {
     });
 }
 
-function populateFriends(friends) {
+function populateFriends(friends, entity) {
     const friendsContainer = document.getElementById('friends-users');
     friendsContainer.innerHTML = ''; // Clear any existing content
 
@@ -62,7 +62,7 @@ function populateFriends(friends) {
         // Create the friends-name div
         const nameDiv = document.createElement('div');
         nameDiv.className = 'friends-name';
-        nameDiv.textContent = friend.name;
+        nameDiv.textContent = friend.username;
 
         // Create the friends-coin div
         const coinDiv = document.createElement('div');
@@ -77,7 +77,7 @@ function populateFriends(friends) {
         // Create the coin span
         const coinSpan = document.createElement('span');
         // coinSpan.textContent = `${friend.coins.toLocaleString()}/${friend.totalCoins.toLocaleString()}`;
-        coinSpan.textContent = `${Math.min(5100, friend.coins)}/${"5100"}`;
+        coinSpan.textContent = `${Math.min(10000, friend.all_coins)}/${"10000"}`;
 
         // Append the image and span to the coinDiv
         coinDiv.appendChild(coinImg);
@@ -87,19 +87,55 @@ function populateFriends(friends) {
         infoDiv.appendChild(nameDiv);
         infoDiv.appendChild(coinDiv);
 
+        // Create a container for the photo and claim button
+        const photoAndButtonDiv = document.createElement('div');
+        photoAndButtonDiv.className = 'friends-photo-button-container';
+
         // Create the friends-photo img
         const photoImg = document.createElement('img');
         photoImg.className = 'friends-photo';
         photoImg.src = `https://t.me/i/userpic/320/${friend.username}.jpg`;
         photoImg.alt = 'avatar';
 
-        // Append the infoDiv and photoImg to the friendDiv
+        // Create the claim button
+        const claimButton = document.createElement('button');
+        claimButton.className = 'claim-button';
+        claimButton.textContent = 'Claim';
+        const coinsComponent = entity.getComponent('CoinsComponent');
+        claimButton.addEventListener('click', async () => {
+            claimButton.disabled = true;
+            const result = await claim(friend.inviterId, friend.id);
+            if (result) {
+                friend.status = "claimed";
+                coinsComponent.amount += result;
+                coinsComponent.all_amount += result;
+                renderClaimButton(claimButton, friend);
+            } else{
+                claimButton.disabled = false;
+            }
+        });
+        renderClaimButton(claimButton, friend);
+
+        photoAndButtonDiv.appendChild(claimButton);
+        photoAndButtonDiv.appendChild(photoImg);
+
+        // Append the infoDiv and photoAndButtonDiv to the friendDiv
         friendDiv.appendChild(infoDiv);
-        friendDiv.appendChild(photoImg);
+        friendDiv.appendChild(photoAndButtonDiv);
 
         // Append the friendDiv to the friendsContainer
         friendsContainer.appendChild(friendDiv);
     });
+}
+
+function renderClaimButton(button, friend) {
+    if (friend.all_coins >= 10000 && friend.status === "accepted") {
+        button.style.display = 'block';
+        button.disabled = false;
+    } else {
+        button.style.display = 'none';
+        button.disabled = true;
+    }
 }
 
 export function render(entity) {
