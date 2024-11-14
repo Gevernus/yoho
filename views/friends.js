@@ -77,7 +77,7 @@ function populateFriends(friends) {
         // Create the coin span
         const coinSpan = document.createElement('span');
         // coinSpan.textContent = `${friend.coins.toLocaleString()}/${friend.totalCoins.toLocaleString()}`;
-        coinSpan.textContent = `${friend.coins}/${"5100"}`;
+        coinSpan.textContent = `${Math.min(5100, friend.coins)}/${"5100"}`;
 
         // Append the image and span to the coinDiv
         coinDiv.appendChild(coinImg);

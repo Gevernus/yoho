@@ -134,7 +134,7 @@ router.get('/:userId/referrals', async (req, res) => {
             where: { inviterId: userId }
         });
         const updatedReferrals = await Promise.all(referrals.map(async (referral) => {
-            const state = await State.findOne({ where: { id: String(referral.id) } });
+            const state = await State.findOne({ where: { id: referral.inviterId } });
             return {
                 ...referral,
                 coins: state ? state.coins : 0
