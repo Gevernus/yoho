@@ -31,45 +31,170 @@ export function init(entity) {
     setupTabs(items.items);
     populateShop(items.items.filter(item => item.type === "ship"));
 
-    const comboElements = document.querySelectorAll('.combo-element');
+    // const comboElements = document.querySelectorAll('.combo-element');
 
-    comboElements.forEach((element, index) => {
-        element.addEventListener('input', (e) => {
-            const inputValue = e.target.value;
+    // comboElements.forEach((element, index) => {
+    //     element.addEventListener('input', (e) => {
+    //         const inputValue = e.target.value;
 
-            // Check if input is not a digit
-            if (isNaN(inputValue)) {
-                e.target.value = ''; // Clear non-digit input
-                return;
-            }
+    //         // Check if input is not a digit
+    //         if (isNaN(inputValue)) {
+    //             e.target.value = ''; // Clear non-digit input
+    //             return;
+    //         }
 
-            // If input length exceeds 1 character, focus on the next element
-            if (inputValue.length > 1) {
-                e.target.value = inputValue[0]; // Keep only the first character
-            }
+    //         // If input length exceeds 1 character, focus on the next element
+    //         if (inputValue.length > 1) {
+    //             e.target.value = inputValue[0]; // Keep only the first character
+    //         }
 
-            // Automatically focus on the next input field if a single digit is entered
-            if (inputValue.length === 1 && index < comboElements.length - 1) {
-                comboElements[index + 1].focus();
-            }
+    //         // Automatically focus on the next input field if a single digit is entered
+    //         if (inputValue.length === 1 && index < comboElements.length - 1) {
+    //             comboElements[index + 1].focus();
+    //         }
+    //     });
+
+    //     element.addEventListener('keydown', (e) => {
+    //         const inputValue = e.target.value;
+
+    //         if (e.key !== 'Backspace' && e.key !== 'Delete' && isNaN(e.key)) {
+    //             e.preventDefault(); // Restrict to digits only
+    //         }
+
+    //         // Handle Backspace to focus on previous element if input is empty
+    //         if (e.key === 'Backspace' && inputValue.length === 0) {
+    //             e.preventDefault(); // Prevent default backspace behavior
+    //             const previousElement = comboElements[index - 1];
+    //             if (previousElement) {
+    //                 previousElement.focus();
+    //             }
+    //         }
+    //     });
+    // });
+
+    const comboPickers = document.querySelectorAll('.combo-picker');
+    const confirmButton = document.getElementById('confirm');
+    const claimButton = document.getElementById('claim');
+
+    let currentCode = [0, 0, 0, 0];
+    const correctCode = [3, 1, 4, 2]; // Example correct code
+    let startY = null;
+    let isHolding = false;
+    let holdTimeout = null;
+
+    comboPickers.forEach((picker) => {
+        const valueElement = picker.querySelector('.combo-value');
+        const index = parseInt(picker.dataset.index);
+
+        // Mouse events
+        picker.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startHolding(picker, e.clientY);
         });
 
-        element.addEventListener('keydown', (e) => {
-            const inputValue = e.target.value;
+        // Touch events
+        picker.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            startHolding(picker, touch.clientY);
+        });
 
-            if (e.key !== 'Backspace' && e.key !== 'Delete' && isNaN(e.key)) {
-                e.preventDefault(); // Restrict to digits only
+        function startHolding(picker, clientY) {
+            startY = clientY;
+            isHolding = true;
+
+            // Show the rotator after holding for a short duration
+            holdTimeout = setTimeout(() => {
+                if (isHolding) {
+                    showRotator(picker);
+                }
+            }, 500); // Adjust this value for desired hold duration
+
+            // Add event listeners for movement and release
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onRelease);
+            document.addEventListener('touchmove', onTouchMove);
+            document.addEventListener('touchend', onRelease);
+        }
+
+        function onMouseMove(e) {
+            if (isHolding) {
+                handleMovement(e.clientY);
             }
+        }
 
-            // Handle Backspace to focus on previous element if input is empty
-            if (e.key === 'Backspace' && inputValue.length === 0) {
-                e.preventDefault(); // Prevent default backspace behavior
-                const previousElement = comboElements[index - 1];
-                if (previousElement) {
-                    previousElement.focus();
+        function onTouchMove(e) {
+            if (isHolding) {
+                const touch = e.touches[0];
+                handleMovement(touch.clientY);
+            }
+        }
+
+        function handleMovement(currentY) {
+            if (startY !== null) {
+                const deltaY = currentY - startY;
+
+                // Determine the increment or decrement based on movement
+                if (deltaY > 10) { // Swipe down
+                    if (currentCode[index] > 0) {
+                        currentCode[index]--;
+                        valueElement.textContent = currentCode[index];
+                        startY = currentY; // Reset startY to avoid multiple changes on small movements
+                    }
+                } else if (deltaY < -10) { // Swipe up
+                    if (currentCode[index] < 9) {
+                        currentCode[index]++;
+                        valueElement.textContent = currentCode[index];
+                        startY = currentY; // Reset startY to avoid multiple changes on small movements
+                    }
                 }
             }
-        });
+        }
+
+        function onRelease(e) {
+            isHolding = false;
+            startY = null;
+            clearTimeout(holdTimeout);
+            hideRotator(picker);
+
+            // Remove movement and release event listeners
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onRelease);
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onRelease);
+        }
+
+        function showRotator(picker) {
+            let rotator = document.createElement('div');
+            rotator.classList.add('rotator-visible');
+            rotator.textContent = "Swipe Up/Down to Set";
+            picker.appendChild(rotator);
+        }
+
+        function hideRotator(picker) {
+            const rotator = picker.querySelector('.rotator-visible');
+            if (rotator) {
+                picker.removeChild(rotator);
+            }
+        }
+    });
+
+    // Handle confirm button
+    confirmButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (JSON.stringify(currentCode) === JSON.stringify(correctCode)) {
+            claimButton.disabled = false;
+            confirmButton.disabled = true;
+        } else {
+            alert(`Incorrect code! ${currentCode}`);
+        }
+    });
+
+    // Handle claim button
+    claimButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Claim successful!');
+        claimButton.disabled = true;
     });
 
 };
