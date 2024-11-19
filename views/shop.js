@@ -83,16 +83,14 @@ export function init(entity) {
     let holdTimeout = null;
 
     comboPickers.forEach((picker) => {
-        const valueElement = picker.querySelector('.combo-value');
+        const valueWrapper = picker.querySelector('.combo-value-wrapper');
         const index = parseInt(picker.dataset.index);
 
-        // Mouse events
         picker.addEventListener('mousedown', (e) => {
             e.preventDefault();
             startHolding(picker, e.clientY);
         });
 
-        // Touch events
         picker.addEventListener('touchstart', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
@@ -103,14 +101,13 @@ export function init(entity) {
             startY = clientY;
             isHolding = true;
 
-            // Show the rotator after holding for a short duration
             holdTimeout = setTimeout(() => {
                 if (isHolding) {
-                    showRotator(picker);
+                    picker.style.overflow = 'visible';
+                    // Optionally do something after holding for a certain time
                 }
-            }, 500); // Adjust this value for desired hold duration
+            }, 200);
 
-            // Add event listeners for movement and release
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onRelease);
             document.addEventListener('touchmove', onTouchMove);
@@ -134,18 +131,17 @@ export function init(entity) {
             if (startY !== null) {
                 const deltaY = currentY - startY;
 
-                // Determine the increment or decrement based on movement
-                if (deltaY > 10) { // Swipe down
+                if (deltaY > 20) { // Swipe down
                     if (currentCode[index] > 0) {
                         currentCode[index]--;
-                        valueElement.textContent = currentCode[index];
-                        startY = currentY; // Reset startY to avoid multiple changes on small movements
+                        updateWheelPickerDisplay(index);
+                        startY = currentY;
                     }
-                } else if (deltaY < -10) { // Swipe up
+                } else if (deltaY < -20) { // Swipe up
                     if (currentCode[index] < 9) {
                         currentCode[index]++;
-                        valueElement.textContent = currentCode[index];
-                        startY = currentY; // Reset startY to avoid multiple changes on small movements
+                        updateWheelPickerDisplay(index);
+                        startY = currentY;
                     }
                 }
             }
@@ -155,31 +151,31 @@ export function init(entity) {
             isHolding = false;
             startY = null;
             clearTimeout(holdTimeout);
-            hideRotator(picker);
-
-            // Remove movement and release event listeners
+            picker.style.overflow = 'hidden';
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('mouseup', onRelease);
             document.removeEventListener('touchmove', onTouchMove);
             document.removeEventListener('touchend', onRelease);
         }
 
-        function showRotator(picker) {
-            let rotator = document.createElement('div');
-            rotator.classList.add('rotator-visible');
-            rotator.textContent = "Swipe Up/Down to Set";
-            picker.appendChild(rotator);
-        }
+        function updateWheelPickerDisplay(index) {
+            const picker = comboPickers[index];
+            const valueWrapper = picker.querySelector('.combo-value-wrapper');
 
-        function hideRotator(picker) {
-            const rotator = picker.querySelector('.rotator-visible');
-            if (rotator) {
-                picker.removeChild(rotator);
-            }
+            const currentValue = currentCode[index];
+            const prevValue = (currentValue === 0) ? 9 : currentValue - 1;
+            const nextValue = (currentValue === 9) ? 0 : currentValue + 1;
+
+            const prevElement = valueWrapper.querySelector('.prev-value');
+            const currentElement = valueWrapper.querySelector('.current-value');
+            const nextElement = valueWrapper.querySelector('.next-value');
+
+            prevElement.textContent = prevValue;
+            currentElement.textContent = currentValue;
+            nextElement.textContent = nextValue;
         }
     });
 
-    // Handle confirm button
     confirmButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (JSON.stringify(currentCode) === JSON.stringify(correctCode)) {
@@ -190,7 +186,6 @@ export function init(entity) {
         }
     });
 
-    // Handle claim button
     claimButton.addEventListener('click', (e) => {
         e.preventDefault();
         alert('Claim successful!');

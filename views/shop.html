@@ -296,6 +296,9 @@
       flex-direction: column;
       align-items: center;
       border-radius: 1.2vh;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
       border: none;
       width: 5.3vh;
       height: 5.3vh;
@@ -307,6 +310,7 @@
       font-family: "PixelSplitter", sans-serif;
       font-size: 1.7vh;
       color: #003566;
+      justify-content: center;
     }
 
     .combo-up,
@@ -334,12 +338,6 @@
       cursor: not-allowed;
     }
 
-    .combo-value {
-      font-size: 24px;
-      font-weight: bold;
-      user-select: none;
-    }
-
     .rotator-visible {
       position: absolute;
       width: 100px;
@@ -349,6 +347,34 @@
       align-items: center;
       justify-content: center;
       border-radius: 10px;
+    }
+
+    .combo-value-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .combo-value {
+      font-size: 24px;
+      font-weight: bold;
+      height: 33.33px;
+      line-height: 33.33px;
+      user-select: none;
+    }
+
+    .prev-value {
+      color: #aaa;
+    }
+
+    .current-value {
+      color: #000;
+    }
+
+    .next-value {
+      color: #aaa;
     }
   </style>
 </head>
@@ -371,16 +397,32 @@
     <form id="combo-container">
       <div id="combo-elements">
         <div class="combo-picker" data-index="0">
-          <div class="combo-value">0</div>
+          <div class="combo-value-wrapper">
+            <div class="combo-value prev-value">9</div>
+            <div class="combo-value current-value">0</div>
+            <div class="combo-value next-value">1</div>
+          </div>
         </div>
         <div class="combo-picker" data-index="1">
-          <div class="combo-value">0</div>
+          <div class="combo-value-wrapper">
+            <div class="combo-value prev-value">9</div>
+            <div class="combo-value current-value">0</div>
+            <div class="combo-value next-value">1</div>
+          </div>
         </div>
         <div class="combo-picker" data-index="2">
-          <div class="combo-value">0</div>
+          <div class="combo-value-wrapper">
+            <div class="combo-value prev-value">9</div>
+            <div class="combo-value current-value">0</div>
+            <div class="combo-value next-value">1</div>
+          </div>
         </div>
         <div class="combo-picker" data-index="3">
-          <div class="combo-value">0</div>
+          <div class="combo-value-wrapper">
+            <div class="combo-value prev-value">9</div>
+            <div class="combo-value current-value">0</div>
+            <div class="combo-value next-value">1</div>
+          </div>
         </div>
       </div>
       <div class="combo-time">
