@@ -66,8 +66,30 @@ export class ReferralsComponent {
 }
 
 export class LeagueComponent {
-    constructor(league) {
-        this.league = league;
+    leagues = ['BRONZE', 'SILVER', 'GOLD', 'DIAMOND']
+    constructor(leagueGoal = 5000, leagueClaimed) {
+        this.leagueGoal = leagueGoal;
+        this.leagueClaimed = leagueClaimed;
+    }
+
+    getCurrentLeague(allCoins) {
+        console.log(`Trying to get league with coins: ${allCoins} and goal: ${this.leagueGoal}`)
+        let leagueIndex = Math.floor(allCoins / this.leagueGoal);
+
+        // Ensure the league index doesn't go beyond the max index of leagues array
+        if (leagueIndex >= this.leagues.length) {
+            leagueIndex = this.leagues.length - 1;
+        }
+
+        return this.leagues[leagueIndex];
+    }
+
+    getLeagueIndex(allCoins) {
+        return Math.floor(allCoins / this.leagueGoal);
+    }
+
+    getLeagueValue(allCoins) {
+        return allCoins % this.leagueGoal;
     }
 }
 

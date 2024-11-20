@@ -27,30 +27,11 @@ export function init(entity) {
     });
 
     const leagueButton = document.querySelector(".league-button");
-    leagueButton.textContent = `${leagueComponent.league} LEAGUE`
+    leagueButton.textContent = `${leagueComponent.getCurrentLeague(coinsComponent.all_amount)} LEAGUE`
     leagueButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "league" });
     });
 };
-
-// function renderClaimComponent(entity) {
-//     const claimContainer = document.getElementById("claim-container");
-//     const incomeContainer = document.getElementById("income");
-//     const timerContainer = document.querySelector(".timer-container");
-//     if (timerComponent.timer >= 3600) {
-//         claimContainer.style.display = 'flex';
-//         timerContainer.style.display = 'none';
-//         incomeContainer.style.display = 'none';
-//         const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
-//         // const claimValue = document.getElementById("claim-value-coins");
-//         // claimValue.textContent = passiveIncomeComponent.incomePerHour;
-
-//     } else {
-//         claimContainer.style.display = 'none';
-//         timerContainer.style.display = 'flex';
-//         incomeContainer.style.display = 'flex';
-//     }
-// }
 
 export function render(entity) {
     const timerFill = document.querySelector('.timer-fill');

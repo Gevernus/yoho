@@ -189,6 +189,7 @@ async function claimCode(entity, code) {
 
         const result = await response.json();
         coinsComponent.amount += parseInt(result.coins);
+        coinsComponent.all_amount += parseInt(result.coins);
         alert(result.message);
     } catch (error) {
         console.error('Error saving state:', error);

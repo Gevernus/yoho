@@ -23,8 +23,8 @@ export class State extends BaseEntity {
     @Column({ type: 'text', default: '' })
     used_codes!: string; // Stores used codes in a comma-separated list
 
-    @Column({ default: 'BRONZE' })
-    league!: string
+    @Column({ default: 0 })
+    league_claimed!: number
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     last_updated!: Date;

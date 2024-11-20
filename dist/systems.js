@@ -173,9 +173,9 @@ export class StorageSystem extends System {
         }
     }
 
-    async getCode() {
+    async getConfig() {
         try {
-            const response = await fetch(`api/config/code`, {
+            const response = await fetch(`api/config`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

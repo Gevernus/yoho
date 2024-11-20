@@ -172,7 +172,7 @@ router.post('/:userId/claim', async (req, res) => {
     }
 });
 
-router.get('/config/code', async (req, res) => {
+router.get('/config', async (req, res) => {
     try {
         // Fetch the config row
         let configRecord = await ConfigRow.findOne({ where: {} });
@@ -200,10 +200,7 @@ router.get('/config/code', async (req, res) => {
         }
 
         // Respond with the current bonus code and last updated time
-        res.json({
-            bonus_code: configRecord.bonus_code,
-            code_updated: configRecord.code_updated
-        });
+        res.json(configRecord);
 
     } catch (error) {
         console.error('Error fetching or updating the bonus code:', error);
@@ -219,7 +216,7 @@ function generate4DigitCode() {
 router.post('/:userId/claim-code', async (req, res) => {
     const userId = req.params.userId;
     const { code } = req.body;
-    
+
     try {
         // Fetch the State associated with the user
         const state = await State.findOne({ where: { id: userId } });
@@ -257,6 +254,28 @@ router.post('/:userId/claim-code', async (req, res) => {
     } catch (error) {
         console.error('Error claiming code:', error);
         res.status(500).send(`Error claiming code`);
+    }
+});
+
+router.post('/:userId/claim-league', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        // Fetch the State associated with the user
+        const state = await State.findOne({ where: { id: userId } });
+        if (!state) {
+            throw new Error('State not found for the given user.');
+        }
+        state.league_claimed++;
+        await state.save();
+
+        res.json({
+            message: 'League claimed successfully!',
+            coins: 2000
+        });
+    } catch (error) {
+        console.error('Error claiming league:', error);
+        res.status(500).send(`Error claiming league`);
     }
 });
 
