@@ -79,7 +79,7 @@ export function init(entity) {
                     picker.style.overflow = 'visible';
                     // Optionally do something after holding for a certain time
                 }
-            }, 200);
+            }, 10);
 
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onRelease);
