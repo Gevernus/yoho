@@ -4,13 +4,25 @@ export function init(entity) {
     currentEntity = entity;
     const userComponent = entity.getComponent('UserComponent');
     const inputComponent = entity.getComponent('InputComponent');
+
     const items = entity.getComponent('ItemsComponent');
     const playerAvatar = document.getElementById('player-avatar');
     const playerName = document.getElementById('player-username');
-    // playerAvatar.style.backgroundImage = `url(https://t.me/i/userpic/320/${userComponent.user.username}.jpg)`;
-    playerAvatar.style.backgroundImage = `url(https://t.me/i/userpic/320/${"gevernus"}.jpg)`;
+    playerAvatar.style.backgroundImage = `url(https://t.me/i/userpic/320/${userComponent.user.username}.jpg)`;
+    // playerAvatar.style.backgroundImage = `url(https://t.me/i/userpic/320/${"gevernus"}.jpg)`;
     playerName.textContent = userComponent.user.username;
     const backButton = document.getElementById("back-button");
+
+    const codeComponent = entity.getComponent('CodeComponent');
+    const comboTime = document.getElementById("combo-time-value");
+    const codeUpdatedDate = new Date(codeComponent.codeUpdated);
+    const now = new Date();
+    const timeDifferenceMs = now.getTime() - codeUpdatedDate.getTime();
+    const minutesSinceUpdate = Math.floor(timeDifferenceMs / (1000 * 60));
+    const remainingMinutes = Math.max(0, 60 - minutesSinceUpdate);
+    comboTime.textContent = remainingMinutes;
+
+
     backButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "home" });
     });
@@ -31,59 +43,20 @@ export function init(entity) {
     setupTabs(items.items);
     populateShop(items.items.filter(item => item.type === "ship"));
 
-    // const comboElements = document.querySelectorAll('.combo-element');
-
-    // comboElements.forEach((element, index) => {
-    //     element.addEventListener('input', (e) => {
-    //         const inputValue = e.target.value;
-
-    //         // Check if input is not a digit
-    //         if (isNaN(inputValue)) {
-    //             e.target.value = ''; // Clear non-digit input
-    //             return;
-    //         }
-
-    //         // If input length exceeds 1 character, focus on the next element
-    //         if (inputValue.length > 1) {
-    //             e.target.value = inputValue[0]; // Keep only the first character
-    //         }
-
-    //         // Automatically focus on the next input field if a single digit is entered
-    //         if (inputValue.length === 1 && index < comboElements.length - 1) {
-    //             comboElements[index + 1].focus();
-    //         }
-    //     });
-
-    //     element.addEventListener('keydown', (e) => {
-    //         const inputValue = e.target.value;
-
-    //         if (e.key !== 'Backspace' && e.key !== 'Delete' && isNaN(e.key)) {
-    //             e.preventDefault(); // Restrict to digits only
-    //         }
-
-    //         // Handle Backspace to focus on previous element if input is empty
-    //         if (e.key === 'Backspace' && inputValue.length === 0) {
-    //             e.preventDefault(); // Prevent default backspace behavior
-    //             const previousElement = comboElements[index - 1];
-    //             if (previousElement) {
-    //                 previousElement.focus();
-    //             }
-    //         }
-    //     });
-    // });
-
     const comboPickers = document.querySelectorAll('.combo-picker');
     const confirmButton = document.getElementById('confirm');
     const claimButton = document.getElementById('claim');
 
+    claimButton.style.display = 'none';
+    confirmButton.style.display = 'block';
+
     let currentCode = [0, 0, 0, 0];
-    const correctCode = [3, 1, 4, 2]; // Example correct code
+    const correctCode = Array.from(codeComponent.code, Number);
     let startY = null;
     let isHolding = false;
     let holdTimeout = null;
 
     comboPickers.forEach((picker) => {
-        const valueWrapper = picker.querySelector('.combo-value-wrapper');
         const index = parseInt(picker.dataset.index);
 
         picker.addEventListener('mousedown', (e) => {
@@ -132,17 +105,13 @@ export function init(entity) {
                 const deltaY = currentY - startY;
 
                 if (deltaY > 20) { // Swipe down
-                    if (currentCode[index] > 0) {
-                        currentCode[index]--;
-                        updateWheelPickerDisplay(index);
-                        startY = currentY;
-                    }
+                    currentCode[index] = (currentCode[index] === 0) ? 9 : currentCode[index] - 1; // Circular decrement
+                    updateWheelPickerDisplay(index);
+                    startY = currentY; // Reset startY to avoid multiple changes on small movements
                 } else if (deltaY < -20) { // Swipe up
-                    if (currentCode[index] < 9) {
-                        currentCode[index]++;
-                        updateWheelPickerDisplay(index);
-                        startY = currentY;
-                    }
+                    currentCode[index] = (currentCode[index] === 9) ? 0 : currentCode[index] + 1; // Circular increment
+                    updateWheelPickerDisplay(index);
+                    startY = currentY; // Reset startY to avoid multiple changes on small movements
                 }
             }
         }
@@ -179,6 +148,8 @@ export function init(entity) {
     confirmButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (JSON.stringify(currentCode) === JSON.stringify(correctCode)) {
+            claimButton.style.display = 'block';
+            confirmButton.style.display = 'none';
             claimButton.disabled = false;
             confirmButton.disabled = true;
         } else {
@@ -188,11 +159,41 @@ export function init(entity) {
 
     claimButton.addEventListener('click', (e) => {
         e.preventDefault();
-        alert('Claim successful!');
+        claimCode(entity, currentCode.join(''));
         claimButton.disabled = true;
+        confirmButton.disabled = false;
+        claimButton.style.display = 'none';
+        confirmButton.style.display = 'block';
     });
 
 };
+
+async function claimCode(entity, code) {
+    const userComponent = entity.getComponent('UserComponent');
+    const coinsComponent = entity.getComponent('CoinsComponent');
+    try {
+        console.log(`Code to send is ${code}`);
+        const response = await fetch(`api/${userComponent.user.id}/claim-code`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code }),
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            alert(text);
+            return;
+        }
+
+        const result = await response.json();
+        coinsComponent.amount += parseInt(result.coins);
+        alert(result.message);
+    } catch (error) {
+        console.error('Error saving state:', error);
+    }
+}
 
 function setupTabs(shopItems) {
     const tabs = document.querySelectorAll('.tab');

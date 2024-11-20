@@ -26,6 +26,13 @@ export class TimerComponent {
     }
 }
 
+export class CodeComponent {
+    constructor(code, codeUpdated) {
+        this.code = code;
+        this.codeUpdated = codeUpdated;
+    }
+}
+
 export class ShkiperComponent {
     constructor(counter, timer) {
         this.counter = counter;

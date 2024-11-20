@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { Referral } from '../models/Referral';
 import { Item } from '../models/Item';
 import { UserItem } from '../models/UserItem';
+import { ConfigRow } from '../models/ConfigRow';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -16,7 +17,7 @@ const dbConfig: DataSourceOptions = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [User, State, Referral, Item, UserItem],
+    entities: [User, State, Referral, Item, UserItem, ConfigRow],
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development'
 };

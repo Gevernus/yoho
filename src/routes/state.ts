@@ -4,6 +4,7 @@ import { State } from '../models/State';
 import { Referral } from '../models/Referral';
 import { UserItem } from '../models/UserItem';
 import { Item } from '../models/Item';
+import { ConfigRow } from '../models/ConfigRow';
 
 const router = Router();
 
@@ -168,6 +169,94 @@ router.post('/:userId/claim', async (req, res) => {
     } catch (error) {
         console.error('Error claiming bonus:', error);
         res.status(500).send(`Error claiming bonus: ${error}`);
+    }
+});
+
+router.get('/config/code', async (req, res) => {
+    try {
+        // Fetch the config row
+        let configRecord = await ConfigRow.findOne({ where: {} });
+
+        // If no config record is found, create a default one
+        if (!configRecord) {
+            configRecord = ConfigRow.create({
+                bonus_code: generate4DigitCode(), // Set a new 4-digit code
+                code_updated: new Date() // Set the current timestamp
+            });
+            await configRecord.save();
+            console.log(`Config created. With code ${configRecord.bonus_code}`);
+        }
+
+        // Calculate the time difference from the last update
+        const now = new Date();
+        const sixtyMinutesInMs = 60 * 60 * 1000; // 60 minutes in milliseconds
+
+        if (now.getTime() - configRecord.code_updated.getTime() > sixtyMinutesInMs) {
+            // More than 60 minutes have passed, generate a new code
+            configRecord.bonus_code = generate4DigitCode();
+            configRecord.code_updated = now; // Update the code_updated timestamp
+            console.log(`Code updated. With code ${configRecord.bonus_code}`);
+            await configRecord.save();
+        }
+
+        // Respond with the current bonus code and last updated time
+        res.json({
+            bonus_code: configRecord.bonus_code,
+            code_updated: configRecord.code_updated
+        });
+
+    } catch (error) {
+        console.error('Error fetching or updating the bonus code:', error);
+        res.status(500).send(`Error: ${error}`);
+    }
+});
+
+// Function to generate a 4-digit code
+function generate4DigitCode() {
+    return Math.floor(1000 + Math.random() * 9000).toString(); // Generates a 4-digit number as a string
+}
+
+router.post('/:userId/claim-code', async (req, res) => {
+    const userId = req.params.userId;
+    const { code } = req.body;
+    
+    try {
+        // Fetch the State associated with the user
+        const state = await State.findOne({ where: { id: userId } });
+        if (!state) {
+            throw new Error('State not found for the given user.');
+        }
+
+        // Check if the code is valid
+        const config = await ConfigRow.findOne({ where: {} });
+        if (!config) {
+            throw new Error('Config not found.');
+        }
+
+        // Check if the code matches the current config code
+        console.log(`Code received: ${code} and code on server is ${config.bonus_code}`);
+        if (config.bonus_code !== code) {
+            return res.status(400).send('Invalid code.');
+        }
+
+        // Check if the code was already used by the user
+        const usedCodes = state.used_codes ? state.used_codes.split(',') : [];
+        if (usedCodes.includes(code)) {
+            return res.status(400).send('Code has already been used.');
+        }
+
+        // Add the code to the used codes list
+        usedCodes.push(code);
+        state.used_codes = usedCodes.join(',');
+        await state.save();
+
+        res.json({
+            message: 'Code claimed successfully!',
+            coins: 5000
+        });
+    } catch (error) {
+        console.error('Error claiming code:', error);
+        res.status(500).send(`Error claiming code`);
     }
 });
 

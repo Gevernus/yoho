@@ -173,6 +173,24 @@ export class StorageSystem extends System {
         }
     }
 
+    async getCode() {
+        try {
+            const response = await fetch(`api/config/code`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed getting code');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Failed getting code:', error);
+        }
+    }
+
     async saveState() {
         if (!this.entity) {
             console.error('No entity provided to save state');

@@ -20,6 +20,9 @@ export class State extends BaseEntity {
     @Column({ default: 0 })
     shkiper_timer!: number
 
+    @Column({ type: 'text', default: '' })
+    used_codes!: string; // Stores used codes in a comma-separated list
+
     @Column({ default: 'BRONZE' })
     league!: string
 
