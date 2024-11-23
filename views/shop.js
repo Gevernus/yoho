@@ -305,7 +305,7 @@ function createShopElement(item) {
     element.className = 'shop-element';
     element.innerHTML = `
                 <img class="item-back" src="images/shop-item-back.svg" alt="item">
-                <img class="item-image" src="${item.image}" alt="item">
+                <img class="item-image" src="images/${item.image}" alt="item">
                 <div class="item-footer">
                     <span class="price">${price}</span>
                     <img class="item-coin" src="/images/mini-coin.svg" alt="mini-coin">
