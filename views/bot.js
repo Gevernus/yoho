@@ -19,7 +19,7 @@ export function init(entity) {
         const wallet = walletComponent.getWallet();
         console.log(`Wallet object`);
         console.log(wallet);
-        if (!wallet.connected) {
+        if (!await wallet.connectionRestored()) {
             alert("Please connect your wallet first");
             return;
         }
