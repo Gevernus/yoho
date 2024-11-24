@@ -13,10 +13,9 @@ export function init(entity) {
     cancelButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "home" });
     });
-
+    const wallet = walletComponent.getWallet();
     const buyButton = document.getElementById("buying-bot-button-buy");
-    buyButton.addEventListener("click", async () => {
-        const wallet = walletComponent.getWallet();
+    buyButton.addEventListener("click", async () => {        
         if (!wallet) {
             alert("Please connect your wallet first");
             return;

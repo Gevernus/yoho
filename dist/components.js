@@ -82,21 +82,20 @@ export class WalletComponent {
             manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
             buttonRootId: 'ton-connect'
         });
+        console.log(`Wallet object is: ${walletUI}`);
         // Fix: use this.wallet instead of tonConnectUI
         walletUI.uiOptions = {
             twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
         };
-        if (walletUI.connected) {
-            walletUI.onStatusChange(async (wallet) => {
-                if (wallet) {
-                    console.log("Wallet connected:", wallet.account);
-                } else {
-                    console.log("Wallet disconnected");
-                }
-            });
-            return walletUI;
-        }
-        return null;
+        walletUI.onStatusChange(async (wallet) => {
+            if (wallet) {
+                console.log("Wallet connected:", wallet.account);
+            } else {
+                console.log("Wallet disconnected");
+            }
+        });
+        console.log(`Wallet is connected=${walletUI.connected}`);
+        return walletUI;
     }
 }
 
