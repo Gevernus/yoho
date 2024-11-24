@@ -71,17 +71,17 @@ export class WalletComponent {
     }
 
     getWallet() {
-        if (!this.wallet) {
-            try {
-                console.log(`Trying to init ton wallet`);
-                this.wallet = new TON_CONNECT_UI.TonConnectUI({
-                    manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
-                    buttonRootId: 'ton-connect'
-                });
-                // Fix: use this.wallet instead of tonConnectUI
-                this.wallet.uiOptions = {
-                    twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
-                };
+        try {
+            console.log(`Trying to init ton wallet`);
+            const walletUI = new TON_CONNECT_UI.TonConnectUI({
+                manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
+                buttonRootId: 'ton-connect'
+            });
+            // Fix: use this.wallet instead of tonConnectUI
+            this.wallet.uiOptions = {
+                twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
+            };
+            if (walletUI.connected) {
                 this.wallet.onStatusChange(async (wallet) => {
                     if (wallet) {
                         console.log("Wallet connected:", wallet.account);
@@ -89,11 +89,12 @@ export class WalletComponent {
                         console.log("Wallet disconnected");
                     }
                 });
-            } catch (error) {
-                console.error('Failed initializing wallet:', error);
+                this.wallet = walletUI;
             }
+
+        } catch (error) {
+            console.error('Failed initializing wallet:', error);
         }
-        return this.wallet;
     }
 }
 
