@@ -70,6 +70,7 @@ export class TelegramSystem extends System {
                 tonConnectUI.uiOptions = {
                     twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
                 };
+                return this.wallet;
             } catch (error) {
                 console.error('Failed getting items:', error);
             }
