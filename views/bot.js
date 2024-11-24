@@ -17,7 +17,9 @@ export function init(entity) {
     const buyButton = document.getElementById("buying-bot-button-buy");
     buyButton.addEventListener("click", async () => {
         const wallet = walletComponent.getWallet();
-        if (!await wallet.restore_connection()) {
+        console.log(`Wallet object`);
+        console.log(wallet);
+        if (!wallet.connected) {
             alert("Please connect your wallet first");
             return;
         }
