@@ -38,7 +38,7 @@ async function initApp() {
     gameEntity.addComponent(new PassiveIncomeComponent(items));
     gameEntity.addComponent(new UserComponent(user));
     gameEntity.addComponent(new TimerComponent(state.timer));
-    gameEntity.addComponent(new WalletComponent(telegramSystem.getWallet()));
+    gameEntity.addComponent(new WalletComponent());
     gameEntity.addComponent(new ItemsComponent(items));
     gameEntity.addComponent(new ReferralsComponent(referrals));
     gameEntity.addComponent(new LeagueComponent(config.league_goal, state.league_claimed));

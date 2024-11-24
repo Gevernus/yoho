@@ -16,7 +16,7 @@ export function init(entity) {
 
     const buyButton = document.getElementById("buying-bot-button-buy");
     buyButton.addEventListener("click", async () => {
-        const wallet = walletComponent.wallet;
+        const wallet = walletComponent.getWallet();
         if (!await wallet.restore_connection()) {
             alert("Please connect your wallet first");
             return;
@@ -32,7 +32,7 @@ export function init(entity) {
             ]
         };
         try {
-            const result = await walletComponent.wallet.sendTransaction(transaction);
+            const result = await walletComponent.getWallet().sendTransaction(transaction);
             console.log("Transaction sent:", result);
             shkiperComponent.counter = 0;
             coinsComponent.amount += 2500;
