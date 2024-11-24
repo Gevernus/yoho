@@ -9,7 +9,7 @@ export function init(entity) {
     const disconnectButton = document.querySelector(".wallet-disconnect");
     disconnectButton.style.display = 'none';
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://aura-tg.ru/tonconnect-manifest.json',
+        manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
     tonConnectUI.uiOptions = {
