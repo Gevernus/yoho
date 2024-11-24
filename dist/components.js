@@ -73,16 +73,24 @@ export class WalletComponent {
     getWallet() {
         if (!this.wallet) {
             try {
-                console.log(`Truing to init ton wallet`);
+                console.log(`Trying to init ton wallet`);
                 this.wallet = new TON_CONNECT_UI.TonConnectUI({
                     manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
                     buttonRootId: 'ton-connect'
                 });
-                tonConnectUI.uiOptions = {
+                // Fix: use this.wallet instead of tonConnectUI
+                this.wallet.uiOptions = {
                     twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
                 };
+                this.wallet.onStatusChange(async (wallet) => {
+                    if (wallet) {
+                        console.log("Wallet connected:", wallet.account);
+                    } else {
+                        console.log("Wallet disconnected");
+                    }
+                });
             } catch (error) {
-                console.error('Failed getting items:', error);
+                console.error('Failed initializing wallet:', error);
             }
         }
         return this.wallet;
