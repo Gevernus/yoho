@@ -57,21 +57,23 @@ export class TelegramSystem extends System {
         } else {
             console.error('Telegram WebApp is not available');
         }
-
-        try {
-            this.wallet = new TON_CONNECT_UI.TonConnectUI({
-                manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
-                buttonRootId: 'ton-connect'
-            });
-            tonConnectUI.uiOptions = {
-                twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
-            };
-        } catch (error) {
-            console.error('Failed getting items:', error);
-        }
     }
 
     getWallet() {
+        if (!this.wallet) {
+            try {
+                console.log(`Truing to init ton wallet`);
+                this.wallet = new TON_CONNECT_UI.TonConnectUI({
+                    manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
+                    buttonRootId: 'ton-connect'
+                });
+                tonConnectUI.uiOptions = {
+                    twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
+                };
+            } catch (error) {
+                console.error('Failed getting items:', error);
+            }
+        }
         return this.wallet;
     }
 
