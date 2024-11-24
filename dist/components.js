@@ -65,6 +65,12 @@ export class ReferralsComponent {
     }
 }
 
+export class WalletComponent {
+    constructor(wallet) {
+        this.wallet = wallet;
+    }
+}
+
 export class LeagueComponent {
     leagues = ['BRONZE', 'SILVER', 'GOLD', 'DIAMOND']
     constructor(leagueGoal = 5000, leagueClaimed) {
