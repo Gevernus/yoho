@@ -16,11 +16,11 @@ export function init(entity) {
     const wallet = walletComponent.getWallet();
     const buyButton = document.getElementById("buying-bot-button-buy");
     buyButton.addEventListener("click", async () => {        
-        if (!wallet) {
+        if (!wallet.connected) {
             alert("Please connect your wallet first");
             return;
         }
-        const tonWeb = new TonWeb;
+        const tonWeb = new TonWeb();
         const transaction = {
             validUntil: Math.floor(Date.now() / 1000) + 3600, // Valid for 1 hour
             messages: [

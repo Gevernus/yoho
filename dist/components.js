@@ -71,31 +71,29 @@ export class WalletComponent {
     }
 
     getWallet() {
-        // try {
-
-
-        // } catch (error) {
-        //     console.error('Failed initializing wallet:', error);
-        // }
-        console.log(`Trying to init ton wallet`);
-        const walletUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
-            buttonRootId: 'ton-connect'
-        });
-        console.log(`Wallet object is: ${walletUI}`);
-        // Fix: use this.wallet instead of tonConnectUI
-        walletUI.uiOptions = {
-            twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
-        };
-        walletUI.onStatusChange(async (wallet) => {
-            if (wallet) {
-                console.log("Wallet connected:", wallet.account);
-            } else {
-                console.log("Wallet disconnected");
-            }
-        });
-        console.log(`Wallet is connected=${walletUI.connected}`);
-        return walletUI;
+        try {
+            console.log(`Trying to init ton wallet`);
+            const walletUI = new TON_CONNECT_UI.TonConnectUI({
+                manifestUrl: 'https://yoho-webapp.com/tonconnect-manifest.json',
+                buttonRootId: 'ton-connect'
+            });
+            console.log(`Wallet object is: ${walletUI}`);
+            // Fix: use this.wallet instead of tonConnectUI
+            walletUI.uiOptions = {
+                twaReturnUrl: 'https://t.me/yoho_nw_bot/YOHO'
+            };
+            walletUI.onStatusChange(async (wallet) => {
+                if (wallet) {
+                    console.log("Wallet connected:", wallet.account);
+                } else {
+                    console.log("Wallet disconnected");
+                }
+            });
+            this.wallet = walletUI;
+        } catch (error) {
+            console.error('Failed initializing wallet:', error);
+        }
+        return this.wallet;
     }
 }
 
