@@ -20,7 +20,7 @@ export function init(entity) {
             alert("Please connect your wallet first");
             return;
         }
-        const tonWebObject = new tonWeb();
+        const tonWebObject = new TonWeb();
         const transaction = {
             validUntil: Math.floor(Date.now() / 1000) + 3600, // Valid for 1 hour
             messages: [
