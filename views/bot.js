@@ -20,18 +20,18 @@ export function init(entity) {
             alert("Please connect your wallet first");
             return;
         }
-        const tonWeb = new TonWeb();
+        const tonWebObject = new tonWeb();
         const transaction = {
             validUntil: Math.floor(Date.now() / 1000) + 3600, // Valid for 1 hour
             messages: [
                 {
-                    address: tonWeb.utils.Address("UQCz3IWNAgm6JA9xjHb9uJleO5JA3SLM6f2BVBNJdPmeIOPO").toString(false),
-                    amount: tonWeb.utils.toNano(1),
+                    address: tonWebObject.utils.Address("UQCz3IWNAgm6JA9xjHb9uJleO5JA3SLM6f2BVBNJdPmeIOPO").toString(false),
+                    amount: tonWebObject.utils.toNano(1),
                 }
             ]
         };
         try {
-            const result = await walletComponent.getWallet().sendTransaction(transaction);
+            const result = await wallet.sendTransaction(transaction);
             console.log("Transaction sent:", result);
             shkiperComponent.counter = 0;
             coinsComponent.amount += 2500;
