@@ -17,7 +17,8 @@ export function init(entity) {
     const buyButton = document.getElementById("buying-bot-button-buy");
     const tonweb = new window.TonWeb();
     const Address = TonWeb.utils.Address;
-    
+    const address_string = new Address("UQA52y0kSPWE6rde4VJykPR78rTjdh2Zv9AkS2irsebhinHe").toString(false);
+    const amount = TonWeb.utils.toNano("1").toString();
     buyButton.addEventListener("click", async () => {        
         if (!wallet.connected) {
             alert("Please connect your wallet first");
@@ -27,8 +28,8 @@ export function init(entity) {
             validUntil: Math.floor(Date.now() / 1000) + 3600, // Valid for 1 hour
             messages: [
                 {
-                    address: new Address("UQA52y0kSPWE6rde4VJykPR78rTjdh2Zv9AkS2irsebhinHe").toString(false),
-                    amount: TonWeb.utils.toNano(1),
+                    address: address_string,
+                    amount: amount,
                 }
             ]
         };
