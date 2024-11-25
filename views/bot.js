@@ -15,6 +15,9 @@ export function init(entity) {
     });
     const wallet = walletComponent.getWallet();
     const buyButton = document.getElementById("buying-bot-button-buy");
+    const tonweb = new window.TonWeb();
+    const Address = TonWeb.utils.Address;
+    
     buyButton.addEventListener("click", async () => {        
         if (!wallet.connected) {
             alert("Please connect your wallet first");
@@ -25,11 +28,12 @@ export function init(entity) {
             validUntil: Math.floor(Date.now() / 1000) + 3600, // Valid for 1 hour
             messages: [
                 {
-                    address: new TonWeb.utils.Address("UQA52y0kSPWE6rde4VJykPR78rTjdh2Zv9AkS2irsebhinHe").toString(false),
+                    address: new Address("UQA52y0kSPWE6rde4VJykPR78rTjdh2Zv9AkS2irsebhinHe").toString(false),
                     amount: TonWeb.utils.toNano(1),
                 }
             ]
         };
+        console.log(transaction);
         try {
             const result = await wallet.sendTransaction(transaction);
             console.log("Transaction sent:", result);
