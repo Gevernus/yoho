@@ -18,7 +18,7 @@ export function init(entity) {
     const tonweb = new window.TonWeb();
     const Address = TonWeb.utils.Address;
     const address_string = new Address("UQA52y0kSPWE6rde4VJykPR78rTjdh2Zv9AkS2irsebhinHe").toString(false);
-    const amount = TonWeb.utils.toNano("0.0001").toString();
+    const amount = TonWeb.utils.toNano("0.5").toString();
     buyButton.addEventListener("click", async () => {        
         if (!wallet.connected) {
             alert("Please connect your wallet first");
