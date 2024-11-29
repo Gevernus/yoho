@@ -17,6 +17,18 @@ export class State extends BaseEntity {
     @Column({ default: -1 })
     shkiper_counter!: number
 
+    @Column({ default: -1 })
+    days_counter!: number
+
+    @Column({ default: 0 })
+    days_claimed!: number
+
+    @Column({ default: 0 })
+    previous_day!: number
+
+    @Column({ default: 0 })
+    referrals_claimed!: number
+
     @Column({ default: 0 })
     shkiper_timer!: number
 

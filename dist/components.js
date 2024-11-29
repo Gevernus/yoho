@@ -26,6 +26,14 @@ export class TimerComponent {
     }
 }
 
+export class TasksComponent {
+    constructor(daysCounter, daysClaimed, referralsClaimed) {
+        this.daysCounter = daysCounter;
+        this.daysClaimed = daysClaimed;
+        this.referralsClaimed = referralsClaimed;
+    }
+}
+
 export class CodeComponent {
     constructor(code, codeUpdated) {
         this.code = code;

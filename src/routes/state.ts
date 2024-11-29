@@ -57,6 +57,10 @@ router.post('/state', async (req, res) => {
             state.timer = stateData.timer;
             state.shkiper_counter = stateData.shkiper_counter;
             state.shkiper_timer = stateData.shkiper_timer;
+            state.days_counter = stateData.days_counter;
+            state.days_claimed = stateData.days_claimed;
+            state.referrals_claimed = stateData.referrals_claimed;
+            state.previous_day = stateData.previous_day;
             state.save();
         }
         return res.status(200).json({ message: "State data saved successfully" });
