@@ -110,14 +110,14 @@ export class WalletComponent {
 
 export class LeagueComponent {
     leagues = ['BRONZE', 'SILVER', 'GOLD', 'DIAMOND']
-    constructor(leagueGoal = 5000, leagueClaimed) {
+    constructor(leagueGoal = 1000, leagueClaimed) {
         this.leagueGoal = leagueGoal;
         this.leagueClaimed = leagueClaimed;
     }
 
-    getCurrentLeague(allCoins) {
-        console.log(`Trying to get league with coins: ${allCoins} and goal: ${this.leagueGoal}`)
-        let leagueIndex = Math.floor(allCoins / this.leagueGoal);
+    getCurrentLeague(income) {
+        console.log(`Trying to get league with income: ${income} and goal: ${this.leagueGoal}`)
+        let leagueIndex = Math.floor(income / this.leagueGoal);
 
         // Ensure the league index doesn't go beyond the max index of leagues array
         if (leagueIndex >= this.leagues.length) {
@@ -127,12 +127,12 @@ export class LeagueComponent {
         return this.leagues[leagueIndex];
     }
 
-    getLeagueIndex(allCoins) {
-        return Math.floor(allCoins / this.leagueGoal);
+    getLeagueIndex(income) {
+        return Math.floor(income / this.leagueGoal);
     }
 
-    getLeagueValue(allCoins) {
-        return allCoins % this.leagueGoal;
+    getLeagueValue(income) {
+        return income;
     }
 }
 

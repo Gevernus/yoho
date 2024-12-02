@@ -27,7 +27,7 @@ export function init(entity) {
     });
 
     const leagueButton = document.querySelector(".league-button");
-    leagueButton.textContent = `${leagueComponent.getCurrentLeague(coinsComponent.all_amount)} LEAGUE`
+    leagueButton.textContent = `${leagueComponent.getCurrentLeague(passiveIncomeComponent.incomePerHour)} LEAGUE`
     leagueButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "league" });
     });

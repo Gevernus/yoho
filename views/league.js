@@ -2,6 +2,7 @@ export function init(entity) {
     const inputComponent = entity.getComponent('InputComponent');
     const userComponent = entity.getComponent('UserComponent');
     const coinsComponent = entity.getComponent('CoinsComponent');
+
     const backButton = document.getElementById("back-button");
     backButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "home" });
@@ -61,11 +62,11 @@ function renderLeague(entity, index = 0) {
     const container = document.querySelector(".league-value-inner");
 
     const leagueComponent = entity.getComponent("LeagueComponent");
-    const coinsComponent = entity.getComponent("CoinsComponent");
+    const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
 
-    total.textContent = leagueComponent.leagueGoal;
+    total.textContent = (leagueComponent.leagueGoal * (index + 1));
     let widthPercentage = 0;
-    if (leagueComponent.getLeagueIndex(coinsComponent.all_amount) > index) {
+    if (leagueComponent.getLeagueIndex(passiveIncomeComponent.incomePerHour) > index) {
         current.textContent = leagueComponent.leagueGoal;
         if (leagueComponent.leagueClaimed <= index) {
             claimButton.style.display = 'block';
@@ -73,10 +74,10 @@ function renderLeague(entity, index = 0) {
             claimButton.style.display = 'none';
         }
         widthPercentage = 100;
-    } else if (leagueComponent.getLeagueIndex(coinsComponent.all_amount) == index) {
-        current.textContent = leagueComponent.getLeagueValue(coinsComponent.all_amount);
+    } else if (leagueComponent.getLeagueIndex(passiveIncomeComponent.incomePerHour) == index) {
+        current.textContent = leagueComponent.getLeagueValue(passiveIncomeComponent.incomePerHour);
         claimButton.style.display = 'none';
-        widthPercentage = leagueComponent.getLeagueValue(coinsComponent.all_amount) / leagueComponent.leagueGoal * 90;
+        widthPercentage = leagueComponent.getLeagueValue(passiveIncomeComponent.incomePerHour) / (leagueComponent.leagueGoal * (index + 1)) * 90;
     } else {
         current.textContent = 0;
         claimButton.style.display = 'none';

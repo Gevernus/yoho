@@ -220,7 +220,6 @@ export class StorageSystem extends System {
         this.state.days_claimed = tasksComponent.daysClaimed;
         this.state.referrals_claimed = tasksComponent.referralsClaimed;
         if (codeComponent.codeErrorDate) {
-            console.log(codeComponent.codeErrorDate);
             this.state.code_error = codeComponent.codeErrorDate;
         }
 
