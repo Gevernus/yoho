@@ -8,9 +8,6 @@ export class ConfigRow extends BaseEntity {
     @Column({ nullable: true })
     bonus_code!: string
 
-    @Column({ nullable: true, type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    code_updated!: Date;
-
     @Column({ default: 5000 })
     league_goal!: number;
 }

@@ -41,6 +41,9 @@ export class State extends BaseEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     last_updated!: Date;
 
+    @Column({ nullable: true, type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    code_error!: Date;
+
     @BeforeUpdate()
     updateLastUpdated() {
         this.last_updated = new Date();

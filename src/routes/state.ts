@@ -61,6 +61,10 @@ router.post('/state', async (req, res) => {
             state.days_claimed = stateData.days_claimed;
             state.referrals_claimed = stateData.referrals_claimed;
             state.previous_day = stateData.previous_day;
+            if (stateData.code_error) {
+                state.code_error = new Date(stateData.code_error);
+            }
+
             state.save();
         }
         return res.status(200).json({ message: "State data saved successfully" });
@@ -184,23 +188,10 @@ router.get('/config', async (req, res) => {
         // If no config record is found, create a default one
         if (!configRecord) {
             configRecord = ConfigRow.create({
-                bonus_code: generate4DigitCode(), // Set a new 4-digit code
-                code_updated: new Date() // Set the current timestamp
+                bonus_code: generate4DigitCode(),
             });
             await configRecord.save();
             console.log(`Config created. With code ${configRecord.bonus_code}`);
-        }
-
-        // Calculate the time difference from the last update
-        const now = new Date();
-        const sixtyMinutesInMs = 60 * 60 * 1000; // 60 minutes in milliseconds
-
-        if (now.getTime() - configRecord.code_updated.getTime() > sixtyMinutesInMs) {
-            // More than 60 minutes have passed, generate a new code
-            configRecord.bonus_code = generate4DigitCode();
-            configRecord.code_updated = now; // Update the code_updated timestamp
-            console.log(`Code updated. With code ${configRecord.bonus_code}`);
-            await configRecord.save();
         }
 
         // Respond with the current bonus code and last updated time

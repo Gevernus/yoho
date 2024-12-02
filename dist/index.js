@@ -48,7 +48,7 @@ async function initApp() {
     gameEntity.addComponent(new ItemsComponent(items));
     gameEntity.addComponent(new ReferralsComponent(referrals));
     gameEntity.addComponent(new LeagueComponent(config.league_goal, state.league_claimed));
-    gameEntity.addComponent(new CodeComponent(config.bonus_code, config.code_updated));
+    gameEntity.addComponent(new CodeComponent(config.bonus_code, state.code_error));
     gameEntity.addComponent(new ShkiperComponent(state.shkiper_counter, state.shkiper_timer));
 
     storageSystem.setEntity(gameEntity);

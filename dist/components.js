@@ -35,9 +35,9 @@ export class TasksComponent {
 }
 
 export class CodeComponent {
-    constructor(code, codeUpdated) {
+    constructor(code, codeErrorDate) {
         this.code = code;
-        this.codeUpdated = codeUpdated;
+        this.codeErrorDate = codeErrorDate;
     }
 }
 

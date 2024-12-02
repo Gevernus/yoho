@@ -1,5 +1,5 @@
 import { System } from './ecs.js';
-import { CoinsComponent, ViewComponent, InputComponent, PassiveIncomeComponent, TimerComponent, ShkiperComponent, TasksComponent } from './components.js';
+import { CoinsComponent, ViewComponent, InputComponent, PassiveIncomeComponent, TimerComponent, ShkiperComponent, TasksComponent, CodeComponent } from './components.js';
 
 export class TimerSystem extends System {
     async init() {
@@ -202,6 +202,7 @@ export class StorageSystem extends System {
         const passiveIncomeComponent = this.entity.getComponent(PassiveIncomeComponent);
         const timerComponent = this.entity.getComponent(TimerComponent);
         const tasksComponent = this.entity.getComponent(TasksComponent);
+        const codeComponent = this.entity.getComponent(CodeComponent);
 
         if (!coinsComponent || !timerComponent || !passiveIncomeComponent) {
             console.error('Entity is missing required components for saving state');
@@ -218,6 +219,11 @@ export class StorageSystem extends System {
         this.state.days_counter = tasksComponent.daysCounter;
         this.state.days_claimed = tasksComponent.daysClaimed;
         this.state.referrals_claimed = tasksComponent.referralsClaimed;
+        if (codeComponent.codeErrorDate) {
+            console.log(codeComponent.codeErrorDate);
+            this.state.code_error = codeComponent.codeErrorDate;
+        }
+
         try {
             const response = await fetch('api/state', {
                 method: 'POST',

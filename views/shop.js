@@ -14,14 +14,22 @@ export function init(entity) {
     const backButton = document.getElementById("back-button");
 
     const codeComponent = entity.getComponent('CodeComponent');
-    const comboTime = document.getElementById("combo-time-value");
-    const codeUpdatedDate = new Date(codeComponent.codeUpdated);
+    const comboTime = document.querySelector(".combo-time");
+    const comboTimeValue = document.getElementById("combo-time-value");
+    const codeErrorDate = new Date(codeComponent.codeErrorDate);
     const now = new Date();
-    const timeDifferenceMs = now.getTime() - codeUpdatedDate.getTime();
+    const timeDifferenceMs = now.getTime() - codeErrorDate.getTime();
     const minutesSinceUpdate = Math.floor(timeDifferenceMs / (1000 * 60));
     const remainingMinutes = Math.max(0, 60 - minutesSinceUpdate);
-    comboTime.textContent = remainingMinutes;
+    const confirmButton = document.getElementById('confirm');
 
+    if (remainingMinutes > 0) {
+        comboTimeValue.textContent = remainingMinutes;
+        comboTime.style.display = 'block';
+        confirmButton.disabled = true;
+    } else {
+        comboTime.style.display = 'none';
+    }
 
     backButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "home" });
@@ -44,7 +52,7 @@ export function init(entity) {
     populateShop(items.items.filter(item => item.type === "ship"));
 
     const comboPickers = document.querySelectorAll('.combo-picker');
-    const confirmButton = document.getElementById('confirm');
+    
     const claimButton = document.getElementById('claim');
 
     claimButton.style.display = 'none';
@@ -153,6 +161,7 @@ export function init(entity) {
             claimButton.disabled = false;
             confirmButton.disabled = true;
         } else {
+            codeComponent.codeErrorDate = new Date().toISOString();
             alert(`Incorrect code! ${currentCode}`);
         }
     });
@@ -329,4 +338,23 @@ export function render(entity) {
     const coinsComponent = entity.getComponent('CoinsComponent');
     document.getElementById("income-text").textContent = `${passiveIncomeComponent.incomePerHour}/h`;
     document.getElementById("coins-text").textContent = `${coinsComponent.amount}`;
+
+    const codeComponent = entity.getComponent('CodeComponent');
+    const comboTime = document.querySelector(".combo-time");
+    const comboTimeValue = document.getElementById("combo-time-value");
+    const codeErrorDate = new Date(codeComponent.codeErrorDate);
+    const now = new Date();
+    const timeDifferenceMs = now.getTime() - codeErrorDate.getTime();
+    const minutesSinceUpdate = Math.floor(timeDifferenceMs / (1000 * 60));
+    const remainingMinutes = Math.max(0, 60 - minutesSinceUpdate);
+    const confirmButton = document.getElementById('confirm');
+
+    if (remainingMinutes > 0) {
+        comboTimeValue.textContent = remainingMinutes;
+        comboTime.style.display = 'block';
+        confirmButton.disabled = true;
+    } else {
+        confirmButton.disabled = false;
+        comboTime.style.display = 'none';
+    }
 }
