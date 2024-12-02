@@ -1,4 +1,4 @@
-export function init(entity) {
+export function init(entity, params) {
     const inputComponent = entity.getComponent('InputComponent');
     const userComponent = entity.getComponent('UserComponent');
     const coinsComponent = entity.getComponent('CoinsComponent');
@@ -17,11 +17,10 @@ export function init(entity) {
             nextEl: '#league-button-next',
             prevEl: '#league-button-back',
         },
-
+        initialSlide: params.index ? params.index : 0,
 
     });
-
-    renderLeague(entity, 0);
+    renderLeague(entity, params.index ? params.index : 0);
 
     swiperInstance.on('slideChange', () => {
         renderLeague(entity, swiperInstance.activeIndex);

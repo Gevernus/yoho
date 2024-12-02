@@ -3,6 +3,9 @@ export function init(entity) {
     const inputComponent = entity.getComponent('InputComponent');
     const coinsComponent = entity.getComponent('CoinsComponent');
     const referralsComponent = entity.getComponent('ReferralsComponent');
+    const leagueComponent = entity.getComponent("LeagueComponent");
+    const passiveIncomeComponent = entity.getComponent('PassiveIncomeComponent');
+
     backButton.addEventListener("click", () => {
         inputComponent.addInput("setView", { view: "home" });
     });
@@ -44,6 +47,18 @@ export function init(entity) {
         });
     });
     updateInviteRewards(referralsComponent.items.length, tasksComponent.referralsClaimed);
+
+    const leagueItems = document.querySelectorAll('.task-league-item');
+    leagueItems.forEach((item, index) => {
+        if (index < leagueComponent.getLeagueIndex(passiveIncomeComponent.incomePerHour)) {
+            item.style.opacity = '1';
+        } else {
+            item.style.opacity = '0.6';
+        }
+        item.addEventListener('click', function () {
+            inputComponent.addInput("setView", { view: "league", params: { index } });
+        });
+    });
 };
 
 function updateDailyRewards(daysCounter, daysClaimed) {

@@ -289,14 +289,14 @@ export class UISystem extends System {
         return this.views[viewName];
     }
 
-    async setView(viewName, container = 'content') {
+    async setView(viewName, container = 'content', params = {}) {
         try {
             const view = await this.loadView(viewName);
             console.log("View is loaded: ", view);
             this.entity.getComponent(InputComponent).addInput("action", { name: `${viewName}Opened` });
             this.currentView = view;
             document.getElementById(container).innerHTML = view.template;
-            view.init(this.entity);
+            view.init(this.entity, params);
         } catch (error) {
             console.error(`Error setting view ${viewName}:`, error);
         }
@@ -307,7 +307,7 @@ export class UISystem extends System {
         const setViewInput = inputComponent.getAndRemoveInputs('setView');
 
         if (setViewInput && setViewInput.length > 0 && setViewInput[0].data) {
-            this.setView(setViewInput[0].data.view);
+            this.setView(setViewInput[0].data.view, 'content', setViewInput[0].data.params);
         }
         if (this.currentView) {
             this.currentView.render(this.entity);
