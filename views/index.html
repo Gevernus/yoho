@@ -29,13 +29,9 @@
             align-items: center;
         }
 
-        .button-container img {
-            position: absolute;
-        }
-
         /* Button Styles */
         .button {
-            width: 11.2vh;
+            width: 10.5vh;
             height: 11.2vh;
             display: flex;
             flex-direction: column;
@@ -45,12 +41,13 @@
             transition: transform 0.3s ease;
         }
 
-        .button:hover {
-            transform: scale(1.1);
+        .button div {
+            width: inherit;
+            height: inherit;
         }
 
-        .button img {
-            height: inherit;
+        .button:hover {
+            transform: scale(1.1);
         }
 
         .modal-overlay {
@@ -161,7 +158,6 @@
             <!-- Dynamic content will be loaded here -->
         </div>
         <div class="button-container">
-            <!-- <img src="/images/buttons-back.svg" alt="Tasks"> -->
             <div class="button navigate" data-page="tasks">
                 <img src="/images/todo.svg" alt="Tasks">
             </div>

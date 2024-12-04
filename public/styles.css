@@ -1,7 +1,26 @@
-html,body{
-    font-size:100%;line-height:1;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing: antialiased;}
-*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
-:focus,:active{outline: none; -webkit-tap-highlight-color: transparent;}
+html,
+body {
+    font-size: 100%;
+    line-height: 1;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:focus,
+:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
 
 html {
     height: 100dvh;
@@ -14,6 +33,11 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     margin: auto;
+}
+
+svg {
+    height: inherit;
+    width: inherit;
 }
 
 #mini-coin {
